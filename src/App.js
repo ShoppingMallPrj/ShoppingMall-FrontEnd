@@ -54,6 +54,10 @@ table {
 * {
   box-sizing: border-box;
 }
+html {
+  font-size: 62.5%;
+  font-family: 'Montserrat', sans-serif;
+}
 `;
 
 function App() {
