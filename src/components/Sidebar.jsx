@@ -1,14 +1,13 @@
 import styled from "styled-components";
+import OutsideSidebar from "./OutsideSidebar";
 
-const Container = styled.div`
-  width: 10.5rem;
-`;
 const Category = styled.div`
   display: flex;
   flex-direction: column;
   text-transform: uppercase;
   text-align: right;
   margin-bottom: 2rem;
+  width: 10.5rem;
 `;
 const CategoryTitle = styled.span`
   font-size: 1.6rem;
@@ -19,6 +18,7 @@ const CategoryList = styled.span`
   font-size: 1.3rem;
   font-weight: 500;
   margin-bottom: 0.5rem;
+  overflow-x: hidden;
 `;
 const SpecialList = styled.span`
   font-size: 1.3rem;
@@ -26,9 +26,9 @@ const SpecialList = styled.span`
   color: red;
 `;
 
-function Sidebar() {
+function Sidebar({ sidebar, hideSidebar }) {
   return (
-    <Container>
+    <OutsideSidebar sidebar={sidebar} hideSidebar={hideSidebar}>
       <Category>
         <CategoryTitle>Mens</CategoryTitle>
         <CategoryList>New Arrivals</CategoryList>
@@ -50,7 +50,7 @@ function Sidebar() {
       <Category>
         <SpecialList>Sale</SpecialList>
       </Category>
-    </Container>
+    </OutsideSidebar>
   );
 }
 

@@ -58,6 +58,10 @@ html {
   font-size: 62.5%;
   font-family: 'Montserrat', sans-serif;
 }
+a {
+  text-decoration: none;
+  color: inherit;
+}
 `;
 
 function App() {
