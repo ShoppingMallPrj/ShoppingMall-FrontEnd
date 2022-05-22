@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import Searchbar from "./Searchbar";
 import Sidebar from "./Sidebar";
 
 const Container = styled.div`
@@ -27,19 +28,24 @@ const NavList = styled.span`
 
 function Header() {
   const [sidebar, setSidebar] = useState(false);
+  const [searchbar, setSearchbar] = useState(false);
   const switchSidebar = () => {
     setSidebar(!sidebar);
   };
   const hideSidebar = () => {
     setSidebar(false);
   };
+  const switchSearchbar = () => {
+    setSearchbar(!searchbar);
+  };
   return (
     <>
       <header>
         <Container>
           <Title>Obscura</Title>
+          <Searchbar searchbar={searchbar} />
           <Nav>
-            <NavList>Search</NavList>
+            <NavList onClick={switchSearchbar}>Search</NavList>
             <NavList>Join</NavList>
             <NavList>Login</NavList>
             <NavList>Order</NavList>
