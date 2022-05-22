@@ -6,6 +6,8 @@ const Container = styled.div`
   font-size: 1.4rem;
   font-weight: 600;
   margin-bottom: 4.2rem;
+  max-width: 131.6rem;
+  min-width: 131.6rem;
 `;
 const Contact = styled.div`
   display: flex;

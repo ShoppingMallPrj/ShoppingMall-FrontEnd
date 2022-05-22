@@ -67,6 +67,11 @@ header {
   justify-content: center;
   min-width: 144rem;
 }
+footer {
+  display: flex;
+  justify-content: center;
+  min-width: 144rem;
+}
 `;
 
 function App() {
