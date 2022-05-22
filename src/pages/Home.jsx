@@ -25,19 +25,20 @@ const Container = styled.div`
 `;
 const Contents = styled.div`
   position: relative;
-`;
-
-const Img = styled.img.attrs({})`
-  position: relative;
-  width: 52.7rem;
-  height: 90rem;
-  &:first-child,
-  :nth-child(4),
-  :nth-child(5) {
+  &:first-child Img,
+  :nth-child(4) Img,
+  :nth-child(5) Img,
+  :last-child Img {
     border-bottom: 1px solid black;
     box-sizing: content-box;
     padding-bottom: 0.65rem;
   }
+`;
+
+const Img = styled.img`
+  position: relative;
+  width: 52.7rem;
+  height: 90rem;
   &:hover {
     opacity: 40%;
   }
