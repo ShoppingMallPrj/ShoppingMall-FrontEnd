@@ -2,9 +2,9 @@ import { useEffect, useRef } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-  position: fixed;
-  top: 11.6rem;
-  right: 0;
+  position: absolute;
+  top: 10.6rem;
+  right: -6.2rem;
   width: ${(props) => props.width};
   overflow-x: hidden;
   z-index: 999;

@@ -4,11 +4,13 @@ import Sidebar from "./Sidebar";
 
 const Container = styled.div`
   display: flex;
+  position: relative;
   justify-content: space-between;
   align-items: center;
   margin: 2.8rem 6.2rem;
   font-weight: 600;
-  min-width: 84rem;
+  max-width: 131.6rem;
+  min-width: 131.6rem;
 `;
 const Title = styled.span`
   font-size: 3rem;
@@ -45,9 +47,9 @@ function Header() {
             <NavList>Contact</NavList>
             <NavList onClick={switchSidebar}>Store</NavList>
           </Nav>
+          <Sidebar sidebar={sidebar} hideSidebar={hideSidebar}></Sidebar>
         </Container>
       </header>
-      <Sidebar sidebar={sidebar} hideSidebar={hideSidebar}></Sidebar>
     </>
   );
 }

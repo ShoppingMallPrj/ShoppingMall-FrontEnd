@@ -62,6 +62,11 @@ a {
   text-decoration: none;
   color: inherit;
 }
+header {
+  display: flex;
+  justify-content: center;
+  min-width: 144rem;
+}
 `;
 
 function App() {
