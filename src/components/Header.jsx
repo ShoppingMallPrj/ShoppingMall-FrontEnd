@@ -38,12 +38,15 @@ function Header() {
   const switchSearchbar = () => {
     setSearchbar(!searchbar);
   };
+  const hideSearchbar = () => {
+    setSearchbar(false);
+  };
   return (
     <>
       <header>
         <Container>
           <Title>Obscura</Title>
-          <Searchbar searchbar={searchbar} />
+          <Searchbar searchbar={searchbar} hideSearchbar={hideSearchbar} />
           <Nav>
             <NavList onClick={switchSearchbar}>Search</NavList>
             <NavList>Join</NavList>

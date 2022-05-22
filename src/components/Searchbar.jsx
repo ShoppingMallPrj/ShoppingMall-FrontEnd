@@ -1,17 +1,8 @@
 import styled from "styled-components";
 import { ReactComponent as SearchGlass } from "../assets/logo/searchGlass.svg";
 import { ReactComponent as XSolid } from "../assets/logo/x-solid.svg";
+import OutsideSearchbar from "./OutsideSearchbar";
 
-const Container = styled.div`
-  width: 42rem;
-  height: ${(props) => (props.searchbar ? "1.8rem" : 0)};
-  position: absolute;
-  top: 5rem;
-  right: 0;
-  overflow-y: hidden;
-  border-bottom: ${(props) => (props.searchbar ? "1px solid black" : "none")};
-  transition: height 0.5s;
-`;
 const Search = styled.div`
   display: flex;
   transition: height 0.5s;
@@ -39,9 +30,9 @@ const SearchImg = styled.span`
   }
 `;
 
-function Searchbar({ searchbar }) {
+function Searchbar({ searchbar, hideSearchbar }) {
   return (
-    <Container searchbar={searchbar}>
+    <OutsideSearchbar searchbar={searchbar} hideSearchbar={hideSearchbar}>
       <Search>
         <SearchForm>
           <SearchInput type="text"></SearchInput>
@@ -55,7 +46,7 @@ function Searchbar({ searchbar }) {
           </SearchImg>
         </SearchImgs>
       </Search>
-    </Container>
+    </OutsideSearchbar>
   );
 }
 
