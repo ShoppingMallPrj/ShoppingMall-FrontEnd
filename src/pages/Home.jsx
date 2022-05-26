@@ -12,6 +12,7 @@ import mainManOuter from "../assets/main/main_man_top.jpeg";
 import mainWomenOuter from "../assets/main/main_women_top.jpeg";
 import mainShoes from "../assets/main/main_shoes.jpeg";
 import mainAcc from "../assets/main/main_acc.jpeg";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: grid;
@@ -88,12 +89,14 @@ function Home() {
       <main>
         <Container>
           <Contents onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-            <Img src={mainMens} className="mainMens" />
-            <Text
-              hover={hoverArray.find((obj) => obj.name === "mainMens")?.hover}
-            >
-              Mens New Arrivals
-            </Text>
+            <Link to={"/mens/new-arrivals"}>
+              <Img src={mainMens} className="mainMens" />
+              <Text
+                hover={hoverArray.find((obj) => obj.name === "mainMens")?.hover}
+              >
+                Mens New Arrivals
+              </Text>
+            </Link>
           </Contents>
           <Contents onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
             <Img src={mainWomens} className="mainWomens" />

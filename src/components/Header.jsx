@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Searchbar from "./Searchbar";
 import Sidebar from "./Sidebar";
@@ -45,7 +46,9 @@ function Header() {
     <>
       <header>
         <Container>
-          <Title>Obscura</Title>
+          <Title>
+            <Link to={"/"}>OUR CLOTHING</Link>
+          </Title>
           <Searchbar searchbar={searchbar} hideSearchbar={hideSearchbar} />
           <Nav>
             <NavList onClick={switchSearchbar}>Search</NavList>

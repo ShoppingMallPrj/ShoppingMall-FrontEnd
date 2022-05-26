@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import OutsideSidebar from "./OutsideSidebar";
 
@@ -31,7 +32,9 @@ function Sidebar({ sidebar, hideSidebar }) {
     <OutsideSidebar sidebar={sidebar} hideSidebar={hideSidebar}>
       <Category>
         <CategoryTitle>Mens</CategoryTitle>
-        <CategoryList>New Arrivals</CategoryList>
+        <CategoryList>
+          <Link to={"/mens/new-arrivals"}>New Arrivals</Link>
+        </CategoryList>
         <CategoryList>Outer</CategoryList>
         <CategoryList>Top</CategoryList>
         <CategoryList>Bottom</CategoryList>
