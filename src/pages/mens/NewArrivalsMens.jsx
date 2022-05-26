@@ -1,6 +1,10 @@
+import { useQuery } from "react-query";
+import { fetchNewArriavlsMens } from "../../api";
+import styled from "styled-components";
+// import Components
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import styled from "styled-components";
+// import Mens New Arrivlas images
 import mensNewArrivals from "../../assets/mens/new-arrivals/mens_outer1.webp";
 import mensNewArrivals2 from "../../assets/mens/new-arrivals/mens_bottom1.webp";
 import mensNewArrivals3 from "../../assets/mens/new-arrivals/mens_outer2.webp";
@@ -51,6 +55,8 @@ const Text = styled.span`
 `;
 
 function NewArrivalsMens() {
+  const { isLoading, data } = useQuery("newArrivalsMens", fetchNewArriavlsMens);
+  console.log(data);
   return (
     <>
       <Header />
