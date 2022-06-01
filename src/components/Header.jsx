@@ -52,8 +52,12 @@ function Header() {
           <Searchbar searchbar={searchbar} hideSearchbar={hideSearchbar} />
           <Nav>
             <NavList onClick={switchSearchbar}>Search</NavList>
-            <NavList>Join</NavList>
-            <NavList>Login</NavList>
+            <NavList>
+              <Link to={"/join"}>Join</Link>
+            </NavList>
+            <NavList>
+              <Link to={"/login"}>Login</Link>
+            </NavList>
             <NavList>Order</NavList>
             <NavList>Cart</NavList>
             <NavList>Contact</NavList>
