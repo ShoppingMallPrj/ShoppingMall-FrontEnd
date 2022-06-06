@@ -1,5 +1,10 @@
 const BASE_URL = "https://shoppingmall-app.herokuapp.com";
 
+export async function fetchSearchItemList(keyword) {
+  return await (
+    await fetch(`${BASE_URL}/api/item/list?keyword=${keyword}`)
+  ).json();
+}
 export async function fetchNewArriavlsMens() {
   return await (await fetch(`${BASE_URL}/api/item/list?keyword=`)).json();
 }

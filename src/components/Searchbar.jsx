@@ -1,50 +1,58 @@
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { ReactComponent as SearchGlass } from "../assets/logo/searchGlass.svg";
 import { ReactComponent as XSolid } from "../assets/logo/x-solid.svg";
 import OutsideSearchbar from "./OutsideSearchbar";
 
-const Search = styled.div`
+const Search = styled.div``;
+const SearchForm = styled.form`
   display: flex;
-  transition: height 0.5s;
   justify-content: space-between;
   align-items: center;
+  transition: height 0.5s;
   overflow-y: hidden;
 `;
-const SearchForm = styled.form``;
 const SearchInput = styled.input`
-  width: 38rem;
+  width: 36rem;
   border: none;
   &:focus {
     outline: none;
   }
 `;
-const SearchImgs = styled.div`
+const SearchImg = styled.button`
+  display: flex;
   height: ${(props) => (props.searchbar ? "2rem" : 0)};
   overflow-y: hidden;
+  white-space: nowrap;
   transition: height 0.5s;
-`;
-const SearchImg = styled.span`
+  border: none;
   margin-left: 0.5rem;
+  background-color: transparent;
+  cursor: pointer;
   &:last-child {
     margin-right: 0.3rem;
   }
 `;
 
 function Searchbar({ searchbar, hideSearchbar }) {
+  const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
+  const onSubmit = (data) => {
+    return navigate(`/search/${data.keyword}`);
+  };
   return (
     <OutsideSearchbar searchbar={searchbar} hideSearchbar={hideSearchbar}>
       <Search>
-        <SearchForm>
-          <SearchInput type="text"></SearchInput>
-        </SearchForm>
-        <SearchImgs searchbar={searchbar}>
-          <SearchImg>
+        <SearchForm onSubmit={handleSubmit(onSubmit)}>
+          <SearchInput {...register("keyword")} type="text"></SearchInput>
+          <SearchImg searchbar={searchbar}>
             <SearchGlass width="15px" />
           </SearchImg>
-          <SearchImg>
+          <SearchImg searchbar={searchbar}>
             <XSolid width="12px" />
           </SearchImg>
-        </SearchImgs>
+        </SearchForm>
       </Search>
     </OutsideSearchbar>
   );

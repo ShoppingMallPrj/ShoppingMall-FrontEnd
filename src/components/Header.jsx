@@ -1,6 +1,8 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import styled from "styled-components";
+import { loginState } from "../atoms";
 import Searchbar from "./Searchbar";
 import Sidebar from "./Sidebar";
 
@@ -30,6 +32,9 @@ const NavList = styled.span`
 function Header() {
   const [sidebar, setSidebar] = useState(false);
   const [searchbar, setSearchbar] = useState(false);
+  const navigate = useNavigate();
+  const setLogin = useSetRecoilState(loginState);
+  const session = JSON.parse(sessionStorage.getItem("user"));
   const switchSidebar = () => {
     setSidebar(!sidebar);
   };
@@ -42,29 +47,64 @@ function Header() {
   const hideSearchbar = () => {
     setSearchbar(false);
   };
+  const logoutUser = () => {
+    sessionStorage.setItem(
+      "user",
+      JSON.stringify({
+        user: false,
+        token: null,
+      })
+    );
+    setLogin(() => {
+      return { user: false, token: null };
+    });
+    navigate("/");
+  };
   return (
     <>
       <header>
-        <Container>
-          <Title>
-            <Link to={"/"}>OUR CLOTHING</Link>
-          </Title>
-          <Searchbar searchbar={searchbar} hideSearchbar={hideSearchbar} />
-          <Nav>
-            <NavList onClick={switchSearchbar}>Search</NavList>
-            <NavList>
-              <Link to={"/join"}>Join</Link>
-            </NavList>
-            <NavList>
-              <Link to={"/login"}>Login</Link>
-            </NavList>
-            <NavList>Order</NavList>
-            <NavList>Cart</NavList>
-            <NavList>Contact</NavList>
-            <NavList onClick={switchSidebar}>Store</NavList>
-          </Nav>
-          <Sidebar sidebar={sidebar} hideSidebar={hideSidebar}></Sidebar>
-        </Container>
+        {session?.user ? (
+          <Container>
+            <Title>
+              <Link to={"/"}>OUR CLOTHING</Link>
+            </Title>
+            <Searchbar searchbar={searchbar} hideSearchbar={hideSearchbar} />
+            <Nav>
+              <NavList onClick={switchSearchbar}>Search</NavList>
+              <NavList onClick={logoutUser}>Logout</NavList>
+              <NavList>
+                <Link to={"/"}>Mypage</Link>
+              </NavList>
+              <NavList>
+                <Link to={"/"}>Cart</Link>
+              </NavList>
+              <NavList>Contact</NavList>
+              <NavList onClick={switchSidebar}>Store</NavList>
+            </Nav>
+            <Sidebar sidebar={sidebar} hideSidebar={hideSidebar}></Sidebar>
+          </Container>
+        ) : (
+          <Container>
+            <Title>
+              <Link to={"/"}>OUR CLOTHING</Link>
+            </Title>
+            <Searchbar searchbar={searchbar} hideSearchbar={hideSearchbar} />
+            <Nav>
+              <NavList onClick={switchSearchbar}>Search</NavList>
+              <NavList>
+                <Link to={"/join"}>Join</Link>
+              </NavList>
+              <NavList>
+                <Link to={"/login"}>Login</Link>
+              </NavList>
+              <NavList>Order</NavList>
+              <NavList>Cart</NavList>
+              <NavList>Contact</NavList>
+              <NavList onClick={switchSidebar}>Store</NavList>
+            </Nav>
+            <Sidebar sidebar={sidebar} hideSidebar={hideSidebar}></Sidebar>
+          </Container>
+        )}
       </header>
     </>
   );

@@ -40,9 +40,7 @@ const Img = styled.img`
   position: relative;
   width: 52.7rem;
   height: 90rem;
-  &:hover {
-    opacity: 40%;
-  }
+  opacity: ${(props) => (props.hover ? "40%" : "100%")};
 `;
 const Text = styled.span`
   position: absolute;
@@ -90,77 +88,149 @@ function Home() {
         <Container>
           <Contents onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
             <Link to={"/mens/new-arrivals"}>
-              <Img src={mainMens} className="mainMens" />
+              <Img
+                hover={hoverArray.find((obj) => obj.name === "mainMens")?.hover}
+                src={mainMens}
+                className="mainMens"
+              />
               <Text
                 hover={hoverArray.find((obj) => obj.name === "mainMens")?.hover}
+                className="mainMens"
               >
                 Mens New Arrivals
               </Text>
             </Link>
           </Contents>
           <Contents onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-            <Img src={mainWomens} className="mainWomens" />
-            <Text
-              hover={hoverArray.find((obj) => obj.name === "mainWomens")?.hover}
-            >
-              Womens New Arrivals
-            </Text>
+            <Link to={"/womens/new-arrivals"}>
+              <Img
+                hover={
+                  hoverArray.find((obj) => obj.name === "mainWomens")?.hover
+                }
+                src={mainWomens}
+                className="mainWomens"
+              />
+              <Text
+                hover={
+                  hoverArray.find((obj) => obj.name === "mainWomens")?.hover
+                }
+                className="mainWomens"
+              >
+                Womens New Arrivals
+              </Text>
+            </Link>
           </Contents>
           <Contents onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-            <Img src={mainManBottom} className="mainManBottom" />
-            <Text
-              hover={
-                hoverArray.find((obj) => obj.name === "mainManBottom")?.hover
-              }
-            >
-              Mens Bottoms
-            </Text>
+            <Link to={"/mens/bottom"}>
+              <Img
+                hover={
+                  hoverArray.find((obj) => obj.name === "mainManBottom")?.hover
+                }
+                src={mainManBottom}
+                className="mainManBottom"
+              />
+              <Text
+                hover={
+                  hoverArray.find((obj) => obj.name === "mainManBottom")?.hover
+                }
+                className="mainManBottom"
+              >
+                Mens Bottoms
+              </Text>
+            </Link>
           </Contents>
           <Contents onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-            <Img src={mainWomenBottom} className="mainWomenBottom" />
-            <Text
-              hover={
-                hoverArray.find((obj) => obj.name === "mainWomenBottom")?.hover
-              }
-            >
-              Womens Bottoms
-            </Text>
+            <Link to={"/womens/bottom"}>
+              <Img
+                hover={
+                  hoverArray.find((obj) => obj.name === "mainWomenBottom")
+                    ?.hover
+                }
+                src={mainWomenBottom}
+                className="mainWomenBottom"
+              />
+              <Text
+                hover={
+                  hoverArray.find((obj) => obj.name === "mainWomenBottom")
+                    ?.hover
+                }
+                className="mainWomenBottom"
+              >
+                Womens Bottoms
+              </Text>
+            </Link>
           </Contents>
           <Contents onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-            <Img src={mainWomenOuter} className="mainWomenOuter" />
-            <Text
-              hover={
-                hoverArray.find((obj) => obj.name === "mainWomenOuter")?.hover
-              }
-            >
-              Womens Outers
-            </Text>
+            <Link to={"/womens/outer"}>
+              <Img
+                hover={
+                  hoverArray.find((obj) => obj.name === "mainWomenOuter")?.hover
+                }
+                src={mainWomenOuter}
+                className="mainWomenOuter"
+              />
+              <Text
+                hover={
+                  hoverArray.find((obj) => obj.name === "mainWomenOuter")?.hover
+                }
+                className="mainWomenOuter"
+              >
+                Womens Outers
+              </Text>
+            </Link>
           </Contents>
           <Contents onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-            <Img src={mainManOuter} className="mainManOuter" />
-            <Text
-              hover={
-                hoverArray.find((obj) => obj.name === "mainManOuter")?.hover
-              }
-            >
-              Mens Outers
-            </Text>
+            <Link to={"/mens/outer"}>
+              <Img
+                hover={
+                  hoverArray.find((obj) => obj.name === "mainManOuter")?.hover
+                }
+                src={mainManOuter}
+                className="mainManOuter"
+              />
+              <Text
+                hover={
+                  hoverArray.find((obj) => obj.name === "mainManOuter")?.hover
+                }
+                className="mainManOuter"
+              >
+                Mens Outers
+              </Text>
+            </Link>
           </Contents>
           <Contents onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-            <Img src={mainShoes} className="mainShoes" />
-            <Text
-              hover={hoverArray.find((obj) => obj.name === "mainShoes")?.hover}
-            >
-              Shoes
-            </Text>
+            <Link to={"/mens/shoes"}>
+              <Img
+                hover={
+                  hoverArray.find((obj) => obj.name === "mainShoes")?.hover
+                }
+                src={mainShoes}
+                className="mainShoes"
+              />
+              <Text
+                hover={
+                  hoverArray.find((obj) => obj.name === "mainShoes")?.hover
+                }
+                className="mainShoes"
+              >
+                Shoes
+              </Text>
+            </Link>
           </Contents>
           <Contents onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-            <Img src={mainAcc} className="mainAcc" />
-            <Text
-              hover={hoverArray.find((obj) => obj.name === "mainAcc")?.hover}
-            >
-              Accessories
-            </Text>
+            <Link to={"/womens/acc"}>
+              <Img
+                hover={hoverArray.find((obj) => obj.name === "mainAcc")?.hover}
+                src={mainAcc}
+                className="mainAcc"
+              />
+              <Text
+                hover={hoverArray.find((obj) => obj.name === "mainAcc")?.hover}
+                className="mainAcc"
+              >
+                Accessories
+              </Text>
+            </Link>
           </Contents>
         </Container>
       </main>
