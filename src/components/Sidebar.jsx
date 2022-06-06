@@ -35,20 +35,42 @@ function Sidebar({ sidebar, hideSidebar }) {
         <CategoryList>
           <Link to={"/mens/new-arrivals"}>New Arrivals</Link>
         </CategoryList>
-        <CategoryList>Outer</CategoryList>
-        <CategoryList>Top</CategoryList>
-        <CategoryList>Bottom</CategoryList>
-        <CategoryList>Shoes</CategoryList>
-        <CategoryList>Acc</CategoryList>
+        <CategoryList>
+          <Link to={"/mens/outer"}>Outer</Link>
+        </CategoryList>
+        <CategoryList>
+          <Link to={"/mens/top"}>Top</Link>
+        </CategoryList>
+        <CategoryList>
+          <Link to={"/mens/bottom"}>Bottom</Link>
+        </CategoryList>
+        <CategoryList>
+          <Link to={"/mens/shoes"}>Shoes</Link>
+        </CategoryList>
+        <CategoryList>
+          <Link to={"/mens/acc"}>Acc</Link>
+        </CategoryList>
       </Category>
       <Category>
         <CategoryTitle>Womens</CategoryTitle>
-        <CategoryList>New Arrivals</CategoryList>
-        <CategoryList>Outer</CategoryList>
-        <CategoryList>Top</CategoryList>
-        <CategoryList>Bottom</CategoryList>
-        <CategoryList>Shoes</CategoryList>
-        <CategoryList>Acc</CategoryList>
+        <CategoryList>
+          <Link to={"/womens/new-arrivals"}>New Arrivals</Link>
+        </CategoryList>
+        <CategoryList>
+          <Link to={"/womens/outer"}>Outer</Link>
+        </CategoryList>
+        <CategoryList>
+          <Link to={"/womens/top"}>Top</Link>
+        </CategoryList>
+        <CategoryList>
+          <Link to={"/womens/bottom"}>Bottom</Link>
+        </CategoryList>
+        <CategoryList>
+          <Link to={"/womens/shoes"}>Shoes</Link>
+        </CategoryList>
+        <CategoryList>
+          <Link to={"/womens/acc"}>Acc</Link>
+        </CategoryList>
       </Category>
       <Category>
         <SpecialList>Sale</SpecialList>
