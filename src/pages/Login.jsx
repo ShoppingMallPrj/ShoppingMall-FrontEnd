@@ -7,6 +7,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { loginState } from "../atoms";
 import styled from "styled-components";
+import KakaoLoginImg from "../assets/logo/kakao_login_medium_narrow.png";
+
+const CLIENT_ID = "221725ca04dd48aab109754c5bfd29ca";
+const REDIRECT_URI = "http://localhost:3000/oauth/callback/kakao";
+const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
 const Container = styled.div`
   display: flex;
@@ -62,6 +67,12 @@ const LoginText = styled.span`
   text-transform: uppercase;
   margin-bottom: 2rem;
 `;
+const SocialLogins = styled.div``;
+const KakaoLink = styled.a``;
+const KakaoLogin = styled.img`
+  width: 13rem;
+  height: 3rem;
+`;
 
 function Login() {
   const { register, handleSubmit } = useForm();
@@ -110,6 +121,11 @@ function Login() {
             />
             <LoginButton>Login</LoginButton>
           </LoginForm>
+          <SocialLogins>
+            <KakaoLink href={KAKAO_AUTH_URL}>
+              <KakaoLogin src={KakaoLoginImg} />
+            </KakaoLink>
+          </SocialLogins>
           <LoginTexts>
             <LoginText>Forgot your password?</LoginText>
             <LoginText>

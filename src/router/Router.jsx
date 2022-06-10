@@ -1,5 +1,5 @@
 import { BrowserRouter as Routers, Routes, Route } from "react-router-dom";
-import Search from "../components/Search";
+import Search from "../pages/Search";
 // import Pages
 import Home from "../pages/Home";
 import Join from "../pages/Join";
@@ -16,6 +16,7 @@ import NewArrivalsWomens from "../pages/womens/NewArrivalsWomens";
 import OuterWomens from "../pages/womens/OuterWomens";
 import ShoesWomens from "../pages/womens/ShoesWomens";
 import TopWomens from "../pages/womens/TopWomens";
+import KakaoRedirect from "../components/KakaoRedirect";
 // import Components
 
 function Router() {
@@ -25,6 +26,7 @@ function Router() {
         <Route path="/" element={<Home />} />
         <Route path="/join" element={<Join />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/oauth/callback/kakao" element={<KakaoRedirect />} />
         <Route path="/search/:keyword" element={<Search />} />
         <Route path="/mens/new-arrivals" element={<NewArrivalsMens />} />
         <Route path="/mens/outer" element={<OuterMens />} />
