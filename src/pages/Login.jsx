@@ -2,16 +2,15 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import { fetchUserEmailLogin } from "../api";
+import { fetchUserEmailLogin, fetchUserKakaoLogin } from "../api";
 import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { loginState } from "../atoms";
 import styled from "styled-components";
 import KakaoLoginImg from "../assets/logo/kakao_login_medium_narrow.png";
+import KaKaoOauth from "react-kakao-login";
 
-const CLIENT_ID = "221725ca04dd48aab109754c5bfd29ca";
-const REDIRECT_URI = "http://localhost:3000/oauth/callback/kakao";
-const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+const clientID = process.env.REACT_APP_CLIENT_ID;
 
 const Container = styled.div`
   display: flex;
@@ -68,11 +67,11 @@ const LoginText = styled.span`
   margin-bottom: 2rem;
 `;
 const SocialLogins = styled.div``;
-const KakaoLink = styled.a``;
-const KakaoLogin = styled.img`
+const KakaoLink = styled(KaKaoOauth)`
   width: 13rem;
   height: 3rem;
 `;
+const KakaoLogin = styled.img``;
 
 function Login() {
   const { register, handleSubmit } = useForm();
@@ -100,6 +99,11 @@ function Login() {
     event.preventDefault();
     mutate(data);
   };
+  const onSuccess = async (response) => {
+    const tokenId = response.response.access_token;
+    const data = await fetchUserKakaoLogin(tokenId);
+    console.log(data);
+  };
   return (
     <>
       <Header />
@@ -122,7 +126,12 @@ function Login() {
             <LoginButton>Login</LoginButton>
           </LoginForm>
           <SocialLogins>
-            <KakaoLink href={KAKAO_AUTH_URL}>
+            <KakaoLink
+              token={clientID}
+              onSuccess={onSuccess}
+              onFail={console.error}
+              onLogout={console.info}
+            >
               <KakaoLogin src={KakaoLoginImg} />
             </KakaoLink>
           </SocialLogins>
