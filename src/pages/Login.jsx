@@ -2,15 +2,21 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import { fetchUserEmailLogin, fetchUserKakaoLogin } from "../api";
+import {
+  fetchUserEmailLogin,
+  fetchUserGoogleLogin,
+  fetchUserKakaoLogin,
+} from "../api";
 import { Link, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { loginState } from "../atoms";
 import styled from "styled-components";
 import KakaoLoginImg from "../assets/logo/kakao_login_medium_narrow.png";
 import KaKaoOauth from "react-kakao-login";
+import { GoogleLogin as GoogleOauth } from "react-google-login";
 
-const clientID = process.env.REACT_APP_CLIENT_ID;
+const CLIENT_ID_KAKAO = process.env.REACT_APP_CLIENT_ID_KAKAO;
+const CLIENT_ID_GOOGLE = process.env.REACT_APP_CLIENT_ID_GOOGLE;
 
 const Container = styled.div`
   display: flex;
@@ -72,6 +78,10 @@ const KakaoLink = styled(KaKaoOauth)`
   height: 3rem;
 `;
 const KakaoLogin = styled.img``;
+const GoogleLink = styled(GoogleOauth)`
+  width: 13rem;
+  height: 3rem;
+`;
 
 function Login() {
   const { register, handleSubmit } = useForm();
@@ -99,9 +109,14 @@ function Login() {
     event.preventDefault();
     mutate(data);
   };
-  const onSuccess = async (response) => {
+  const onSuccessKakaoLogin = async (response) => {
     const tokenId = response.response.access_token;
     const data = await fetchUserKakaoLogin(tokenId);
+    console.log(data);
+  };
+  const onSuccessGooglLogin = async (response) => {
+    const tokenId = response.tokenId;
+    const data = await fetchUserGoogleLogin(tokenId);
     console.log(data);
   };
   return (
@@ -127,13 +142,20 @@ function Login() {
           </LoginForm>
           <SocialLogins>
             <KakaoLink
-              token={clientID}
-              onSuccess={onSuccess}
+              token={CLIENT_ID_KAKAO}
+              onSuccess={onSuccessKakaoLogin}
               onFail={console.error}
               onLogout={console.info}
             >
               <KakaoLogin src={KakaoLoginImg} />
             </KakaoLink>
+            <GoogleLink
+              clientId={CLIENT_ID_GOOGLE}
+              buttonText="Login"
+              onSuccess={onSuccessGooglLogin}
+              onFailure={console.error}
+              cookiePolicy={"single_host_origin"}
+            />
           </SocialLogins>
           <LoginTexts>
             <LoginText>Forgot your password?</LoginText>

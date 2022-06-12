@@ -29,6 +29,11 @@ export async function fetchUserEmailLogin(data) {
 export async function fetchUserKakaoLogin(code) {
   return await (await fetch(`${BASE_URL}/api/login/kakao?code=${code}`)).json();
 }
+export async function fetchUserGoogleLogin(tokenId) {
+  return await (
+    await fetch(`${BASE_URL}/api/login/google?tokenId=${tokenId}`)
+  ).json();
+}
 // fetch Test Data
 export async function fetchGetTestData() {
   const response = await fetch("https://jsonplaceholder.typicode.com/posts/1");
