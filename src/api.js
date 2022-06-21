@@ -27,19 +27,12 @@ export async function fetchUserEmailLogin(data) {
   });
 }
 export async function fetchUserKakaoLogin(code) {
-  return await (await fetch(`${BASE_URL}/api/login/kakao?code=${code}`)).json();
+  return await fetch(`${BASE_URL}/api/login/kakao?code=${code}`);
 }
 export async function fetchUserGoogleLogin(tokenId) {
-  return await (
-    await fetch(`${BASE_URL}/api/login/google?tokenId=${tokenId}`)
-  ).json();
+  return await fetch(`${BASE_URL}/api/login/google?tokenId=${tokenId}`);
 }
 // fetch Test Data
-export async function fetchGetTestData() {
-  const response = await fetch("https://jsonplaceholder.typicode.com/posts/1");
-  const json = await response.json();
-  return json;
-}
 export async function fetchCreateTestData(data) {
   return await fetch("https://jsonplaceholder.typicode.com/posts", {
     method: "POST",
