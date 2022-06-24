@@ -16,6 +16,7 @@ import NewArrivalsWomens from "../pages/womens/NewArrivalsWomens";
 import OuterWomens from "../pages/womens/OuterWomens";
 import ShoesWomens from "../pages/womens/ShoesWomens";
 import TopWomens from "../pages/womens/TopWomens";
+import ItemUpload from "../pages/ItemUpload";
 // import Components
 
 function Router() {
@@ -38,6 +39,7 @@ function Router() {
         <Route path="/womens/bottom" element={<BottomWomens />} />
         <Route path="/womens/shoes" element={<ShoesWomens />} />
         <Route path="/womens/acc" element={<AccWomens />} />
+        <Route path="/item/upload" element={<ItemUpload />} />
       </Routes>
     </Routers>
   );

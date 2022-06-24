@@ -49,3 +49,14 @@ export async function fetchCreateTestData(data) {
     },
   });
 }
+
+//form dat를 받아와 아이템을 등록한다.
+export async function fetchCreateItem(data) {
+  return await (
+    await fetch(`${BASE_URL}/api/item/create`, {
+      method: "POST",
+      body: data,
+    })
+  );
+
+}
