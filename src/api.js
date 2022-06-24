@@ -58,5 +58,37 @@ export async function fetchCreateItem(data) {
       body: data,
     })
   );
+}
 
+/* 문의사항 데이터 리스트 요청 */
+export async function fetchInquiry({page, size}) {
+  return await ( await fetch(
+    `${BASE_URL}/api/inquiry/list?page=${page}&size=${size}&sort=inquiryId,desc`,
+    {
+      method: "GET",
+    }
+  )).json();
+}
+
+/* 문의사항 게시물 1개 요청 */
+export async function fetchInquiryDetail(inquiryId, pw) {
+  return await (
+    await fetch(
+      `${BASE_URL}/api/inquiry/${inquiryId}?pw=${pw}?`,
+      {
+        method: "GET",
+      }
+    )
+  ).json();  
+}
+
+/* 문의사항 생성 */
+export async function createInquiry(data) {
+  return await fetch("https://jsonplaceholder.typicode.com/posts", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  });
 }
