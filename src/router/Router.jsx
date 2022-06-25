@@ -46,7 +46,7 @@ function Router() {
         <Route path="/item/upload" element={<ItemUpload />} />
         <Route path="/order" element={<Order />} />
         <Route path="/inquiry" element={<Inquiry />} />
-        <Route path="/inquiry:inquiryId" element={<InquiryDetail />} />
+        <Route path="/inquiry/:inquiryId" element={<InquiryDetail />} />
         <Route path="/inquiry/create" element={<InquiryCreate />} />
       </Routes>
     </Routers>

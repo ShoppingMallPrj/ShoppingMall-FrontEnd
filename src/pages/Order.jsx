@@ -8,7 +8,7 @@ function Order() {
   <>
     <Header/>
     <main>
-        ddd
+        orderPage
     </main>
     <Footer/>
   </>

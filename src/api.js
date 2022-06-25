@@ -71,10 +71,10 @@ export async function fetchInquiry({page, size}) {
 }
 
 /* 문의사항 게시물 1개 요청 */
-export async function fetchInquiryDetail(inquiryId, pw) {
+export async function fetchInquiryDetail(inquiryId) {
   return await (
     await fetch(
-      `${BASE_URL}/api/inquiry/${inquiryId}?pw=${pw}?`,
+      `${BASE_URL}/api/inquiry/${inquiryId}`,
       {
         method: "GET",
       }

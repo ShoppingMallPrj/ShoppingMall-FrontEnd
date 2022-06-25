@@ -10,6 +10,9 @@ import styled from "styled-components";
 const pageSize = 10;
 
 function Inquiry() {
+
+  const navigate = useNavigate();
+
   const [inquiryState, setInquiryState] = useState({
     content: [],
     totalPages: 0, // 전체 페이지
@@ -41,50 +44,42 @@ function Inquiry() {
     fetch(0);
   }, []);
 
-  // const onClickItem = async (inquiry) => {
-  //   if (!inquiry.secret) {
-  //     navigator(`/inquiry/${inquiry.inquiryId}`);
-  //   } else {
-  //     //모달창 띄운다.
-  //   }
-  //   try {
-  //     const res = await fetchInquiryDetail(inquiry.inquiryId);
-  //     navigator(`/inquiry/${inquiry.inquiryId}`);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  return (
-    <>
-      <Header />
-      <main>
+  const Body = () => {
+    if (inquiryState.isLoading) return <>LOADING...</>;
+    if (inquiryState.isError) return <>Error</>;
+    return (
+      <>
         {inquiryState.content.map((inquiry) => {
           return (
             <>
-              <h1
-                onClick={async () => {
-                  //onClickItem(inquiry);
-                }}
-              >
+              <Link to={`/inquiry/${inquiry.inquiryId}`}>
                 {inquiry.inquiryTitle}
-              </h1>
+              </Link>
               <h1>{inquiry.userEmail}</h1>
             </>
           );
         })}
 
+      </>
+    );
+  };  
+
+  return (
+    <>
+      <Header />
+      <main>
+        <Body></Body>
         {/* 글 작성 링크 */}
         <Link to={`/inquiry/create`}>문의 작성</Link>
-
         {/* 페이지네이션 */}
         <Pagenation
           total={inquiryState.totalPages}
-          onChange={async (page) => fetch(page-1)}
+          onChange={async (page) => fetch(page - 1)}
           //fetch={(page) => fetch(page)}
           hideNav={true}
         ></Pagenation>
       </main>
+
       <Footer />
     </>
   );

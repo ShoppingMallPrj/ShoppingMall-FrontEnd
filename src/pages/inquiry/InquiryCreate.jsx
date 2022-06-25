@@ -15,9 +15,7 @@ function InquiryCreate() {
         {/*title*/}
         <div>내용</div>
         <input></input>
-        <div>비밀글</div>
 
-        <input type="checkbox" id="vehicle2" name="vehicle2" value="Car" />
       </main>
       <Footer />
     </>

@@ -3,7 +3,7 @@ import { useState } from "react";
 import styled, {css} from "styled-components";
 
 export default function Pagenation({
-  onChange = (num) => {}, //페이지 변경 시 call
+  onChange = async (num) => {}, //페이지 변경 시 call
   defaultPageSize,
   defaultCurrent = 1,
   total, //총 페이지 수
@@ -17,12 +17,12 @@ export default function Pagenation({
   const [current, setCurrent] = useState(defaultCurrent);
  
   //페이지 눌리면 call
-  const onClick = (pageNum) => {
+  const onClick = async (pageNum) => {
     
     if(pageNum === current) return;
-    
-    setCurrent(pageNum);
-    onChange(pageNum);
+    console.log(current);
+    setCurrent((page)=> pageNum);
+    await onChange(pageNum);
   };
 
   const pages = [];
