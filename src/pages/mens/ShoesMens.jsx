@@ -56,7 +56,6 @@ const Text = styled.span`
 
 function ShoesMens() {
   const { isLoading, data } = useQuery("ShoesMens", fetchNewArriavlsMens);
-  console.log(data);
   return (
     <>
       <Header />

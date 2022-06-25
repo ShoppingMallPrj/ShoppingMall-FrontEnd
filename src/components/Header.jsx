@@ -73,12 +73,14 @@ function Header() {
               <NavList onClick={switchSearchbar}>Search</NavList>
               <NavList onClick={logoutUser}>Logout</NavList>
               <NavList>
-                <Link to={"/"}>Mypage</Link>
+                <Link to={"/mypage"}>Mypage</Link>
               </NavList>
               <NavList>
-                <Link to={"/"}>Cart</Link>
+                <Link to={"/cart"}>Cart</Link>
               </NavList>
-              <NavList>Contact</NavList>
+              <NavList>
+                <Link to={"/contact"}>Contact</Link>
+              </NavList>
               <NavList onClick={switchSidebar}>Store</NavList>
             </Nav>
             <Sidebar sidebar={sidebar} hideSidebar={hideSidebar}></Sidebar>
@@ -97,9 +99,15 @@ function Header() {
               <NavList>
                 <Link to={"/login"}>Login</Link>
               </NavList>
-              <NavList>Order</NavList>
-              <NavList>Cart</NavList>
-              <NavList>Contact</NavList>
+              <NavList>
+                <Link to={"/login"}>Order</Link>
+              </NavList>
+              <NavList>
+                <Link to={"/cart"}>Cart</Link>
+              </NavList>
+              <NavList>
+                <Link to={"/contact"}>Contact</Link>
+              </NavList>
               <NavList onClick={switchSidebar}>Store</NavList>
             </Nav>
             <Sidebar sidebar={sidebar} hideSidebar={hideSidebar}></Sidebar>

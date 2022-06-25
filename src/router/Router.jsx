@@ -4,6 +4,7 @@ import Search from "../pages/Search";
 import Home from "../pages/Home";
 import Join from "../pages/Join";
 import Login from "../pages/Login";
+import Item from "../pages/Item";
 import AccMens from "../pages/mens/AccMens";
 import BottomMens from "../pages/mens/BottomMens";
 import NewArrivalsMens from "../pages/mens/NewArrivalsMens";
@@ -16,6 +17,7 @@ import NewArrivalsWomens from "../pages/womens/NewArrivalsWomens";
 import OuterWomens from "../pages/womens/OuterWomens";
 import ShoesWomens from "../pages/womens/ShoesWomens";
 import TopWomens from "../pages/womens/TopWomens";
+
 // import Components
 
 function Router() {
@@ -38,6 +40,7 @@ function Router() {
         <Route path="/womens/bottom" element={<BottomWomens />} />
         <Route path="/womens/shoes" element={<ShoesWomens />} />
         <Route path="/womens/acc" element={<AccWomens />} />
+        <Route path="/item/:name" element={<Item />} />
       </Routes>
     </Routers>
   );

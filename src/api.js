@@ -8,6 +8,9 @@ export async function fetchSearchItemList(keyword) {
 export async function fetchNewArriavlsMens() {
   return await (await fetch(`${BASE_URL}/api/item/list?keyword=`)).json();
 }
+export async function fetchItemInfo(id) {
+  return await (await fetch(`${BASE_URL}/api/item/${id}`)).json();
+}
 export async function fetchUserEmailJoin(data) {
   return await fetch(`${BASE_URL}/api/user/create`, {
     method: "POST",
