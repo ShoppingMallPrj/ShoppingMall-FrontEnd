@@ -18,6 +18,11 @@ import OuterWomens from "../pages/womens/OuterWomens";
 import ShoesWomens from "../pages/womens/ShoesWomens";
 import TopWomens from "../pages/womens/TopWomens";
 
+import ItemUpload from "../pages/ItemUpload";
+import Order from "../pages/Order";
+import Inquiry from "../pages/inquiry/Inquiry";
+import InquiryDetail from "../pages/inquiry/InquiryDetail";
+import InquiryCreate from "../pages/inquiry/InquiryCreate";
 // import Components
 
 function Router() {
@@ -41,6 +46,11 @@ function Router() {
         <Route path="/womens/shoes" element={<ShoesWomens />} />
         <Route path="/womens/acc" element={<AccWomens />} />
         <Route path="/item/:name" element={<Item />} />
+        <Route path="/item/upload" element={<ItemUpload />} />
+        <Route path="/order" element={<Order />} />
+        <Route path="/inquiry" element={<Inquiry />} />
+        <Route path="/inquiry/:inquiryId" element={<InquiryDetail />} />
+        <Route path="/inquiry/create" element={<InquiryCreate />} />
       </Routes>
     </Routers>
   );
