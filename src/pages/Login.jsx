@@ -128,7 +128,7 @@ function Login() {
         })
       );
       setLogin(() => {
-        return { user: true, token: json.token };
+        return { user: true, userRole: json.userRole, token: json.token };
       });
       navigate("/");
     }

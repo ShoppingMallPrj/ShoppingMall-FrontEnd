@@ -33,7 +33,7 @@ function Header() {
   const [sidebar, setSidebar] = useState(false);
   const [searchbar, setSearchbar] = useState(false);
   const navigate = useNavigate();
-  const setLogin = useSetRecoilState(loginState);
+  const [login, setLogin] = useRecoilState(loginState);
   const session = JSON.parse(sessionStorage.getItem("user"));
   const switchSidebar = () => {
     setSidebar(!sidebar);
@@ -56,7 +56,7 @@ function Header() {
       })
     );
     setLogin(() => {
-      return { user: false, token: null };
+      return { user: false, userRole: null, token: null };
     });
     navigate("/");
   };
@@ -73,10 +73,18 @@ function Header() {
               <NavList onClick={switchSearchbar}>Search</NavList>
               <NavList onClick={logoutUser}>Logout</NavList>
               <NavList>
-                <Link to={"/mypage"}>Mypage</Link>
+                {login.userRole === "ADMIN" ? (
+                  <Link to={"/admin/item"}>Mypage</Link>
+                ) : (
+                  <Link to={"/mypage"}>Mypage</Link>
+                )}
               </NavList>
               <NavList>
-                <Link to={"/cart"}>Cart</Link>
+                {login.userRole === "ADMIN" ? (
+                  <Link to={"/admin/order"}>Order</Link>
+                ) : (
+                  <Link to={"/cart"}>Cart</Link>
+                )}
               </NavList>
               <NavList>
                 <Link to={"/contact"}>Contact</Link>
