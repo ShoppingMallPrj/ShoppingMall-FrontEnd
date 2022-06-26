@@ -21,6 +21,7 @@ import Order from "../pages/Order";
 import Inquiry from "../pages/inquiry/Inquiry";
 import InquiryDetail from "../pages/inquiry/InquiryDetail";
 import InquiryCreate from "../pages/inquiry/InquiryCreate";
+import User from "../pages/user/User";
 // import Components
 
 function Router() {
@@ -48,9 +49,13 @@ function Router() {
         <Route path="/inquiry" element={<Inquiry />} />
         <Route path="/inquiry/:inquiryId" element={<InquiryDetail />} />
         <Route path="/inquiry/create" element={<InquiryCreate />} />
+        <Route path="/user" element ={<User/>}/>
       </Routes>
     </Routers>
   );
 }
+
+
+
 
 export default Router;

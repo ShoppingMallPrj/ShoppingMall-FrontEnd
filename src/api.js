@@ -92,3 +92,15 @@ export async function createInquiry(data) {
     },
   });
 }
+
+/* 유저 정보 요청(토큰 필요) */
+/* 문의사항 생성 */
+export async function fetchUser(token) {
+  return await fetch(`${BASE_URL}/api/user`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}

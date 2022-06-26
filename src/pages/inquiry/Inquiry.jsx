@@ -1,16 +1,16 @@
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchInquiry, fetchInquiryDetail } from "../../api";
 import Pagenation from "../../components/Pagenation";
-import styled from "styled-components";
+
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
 
 //한번에 불러올 페이지 사이즈
 const pageSize = 10;
 
 function Inquiry() {
-
   const navigate = useNavigate();
 
   const [inquiryState, setInquiryState] = useState({
@@ -32,8 +32,6 @@ function Inquiry() {
         totalPages: res.totalPages,
         isLoading: false,
       }));
-      console.log(res);
-      //setInquiryState(res.data);
     } catch (error) {
       setInquiryState((inquiryState) => ({ ...inquiryState, isError: true }));
     }
@@ -59,10 +57,9 @@ function Inquiry() {
             </>
           );
         })}
-
       </>
     );
-  };  
+  };
 
   return (
     <>
