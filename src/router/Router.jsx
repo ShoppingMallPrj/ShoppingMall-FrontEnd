@@ -1,4 +1,10 @@
-import { BrowserRouter as Routers, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Routers,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 import Search from "../pages/Search";
 // import Pages
 import Home from "../pages/Home";
@@ -49,13 +55,23 @@ function Router() {
         <Route path="/inquiry" element={<Inquiry />} />
         <Route path="/inquiry/:inquiryId" element={<InquiryDetail />} />
         <Route path="/inquiry/create" element={<InquiryCreate />} />
-        <Route path="/user" element ={<User/>}/>
+        <Route path="/user" element={ <PrivateRoute> <User/> </PrivateRoute>}/>
       </Routes>
     </Routers>
   );
 }
 
+/* 페이지 진입에 로그인 권한이 필요할 경우 사용 */
+const PrivateRoute = ({ children, match }) => {
+    
+  const user = sessionStorage.getItem("user");
+  const location = useLocation();
 
-
+  console.log(JSON.parse(user).user);
+  if (!JSON.parse(user).user) {
+    return <Navigate to="/login" state={location.pathname} />;
+  }
+  return children;
+};
 
 export default Router;

@@ -11,7 +11,6 @@ import Header from "../../components/Header";
 const pageSize = 10;
 
 function Inquiry() {
-  const navigate = useNavigate();
 
   const [inquiryState, setInquiryState] = useState({
     content: [],

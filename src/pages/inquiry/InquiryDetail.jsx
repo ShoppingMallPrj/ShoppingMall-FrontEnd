@@ -32,8 +32,8 @@ function InquiryDetail() {
   }, []);
 
   const Body = () => {
+    
     if (inquiryState.isLoading) return <>LOADING...</>;
-
     if (inquiryState.isError) return <>Error</>;
 
     return (

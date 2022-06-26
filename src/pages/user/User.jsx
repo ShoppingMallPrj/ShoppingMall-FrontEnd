@@ -16,19 +16,41 @@ function User() {
   
   const fetch = async () => {
 
+    try {
+    
+    } catch {
+
+    }
+    
     const user = sessionStorage.getItem('user');
     const res = await fetchUser(JSON.parse(user).token);
+    
     console.log(await res.json());
   }
 
   useEffect(() => {
     fetch();
   }, []);
+
+  const Body = () => {
+
+    if (userState.isLoading) return <>LOADING...</>;
+    if (userState.isError) return <>Error</>;
+
+    return (
+      <>
+      </>
+    )
+
+  }
   
   return (
     <>
       <Header/>
       <main> 
+        <Body>
+
+        </Body>
       </main>
       <Footer/>
     </>

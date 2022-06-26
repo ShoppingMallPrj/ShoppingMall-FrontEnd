@@ -7,7 +7,7 @@ import {
   fetchUserGoogleLogin,
   fetchUserKakaoLogin,
 } from "../api";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { loginState } from "../atoms";
 import styled from "styled-components";
@@ -84,6 +84,7 @@ const GoogleLink = styled(GoogleOauth)`
 `;
 
 function Login() {
+  const { state } = useLocation();
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const setLogin = useSetRecoilState(loginState);
@@ -101,7 +102,9 @@ function Login() {
         setLogin(() => {
           return { user: true, token: json.token };
         });
-        navigate("/");
+        
+        if(state){navigate(state);}
+        else {navigate("/");}
       }
     },
   });
