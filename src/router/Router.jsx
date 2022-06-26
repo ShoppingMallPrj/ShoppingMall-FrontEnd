@@ -62,12 +62,11 @@ function Router() {
 }
 
 /* 페이지 진입에 로그인 권한이 필요할 경우 사용 */
-const PrivateRoute = ({ children, match }) => {
+const PrivateRoute = ({ children }) => {
     
   const user = sessionStorage.getItem("user");
   const location = useLocation();
 
-  console.log(JSON.parse(user).user);
   if (!JSON.parse(user).user) {
     return <Navigate to="/login" state={location.pathname} />;
   }

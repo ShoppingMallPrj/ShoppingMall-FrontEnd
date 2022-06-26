@@ -20,7 +20,6 @@ export default function Pagenation({
   const onClick = async (pageNum) => {
     
     if(pageNum === current) return;
-    console.log(current);
     setCurrent((page)=> pageNum);
     await onChange(pageNum);
   };
