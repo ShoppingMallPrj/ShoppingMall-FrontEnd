@@ -97,6 +97,7 @@ function Login() {
           JSON.stringify({
             user: true,
             token: json.token,
+            userRole: json.userRole,
           })
         );
         setLogin(() => {

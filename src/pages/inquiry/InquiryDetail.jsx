@@ -1,11 +1,20 @@
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import { fetchInquiryDetail } from "../../api";
+import { useForm } from "react-hook-form";
+import { fetchInquiryDetail, answerInquiry } from "../../api";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 function InquiryDetail() {
+
+  const {
+    register,
+    handleSubmit,
+  } = useForm();  
+  
   const { inquiryId } = useParams();
+  const user = JSON.parse(sessionStorage.getItem("user"));
+
   const [inquiryState, setInquiryState] = useState({
     inquiry: {},
     isLoading: true,
@@ -15,8 +24,6 @@ function InquiryDetail() {
   const fetch = async () => {
     try {
       const res = await fetchInquiryDetail(inquiryId);
-
-      console.log(res);
       setInquiryState({
         ...inquiryState,
         inquiry: res,
@@ -24,6 +31,17 @@ function InquiryDetail() {
       });
     } catch (error) {
       setInquiryState({ ...inquiryState, isLoading: false });
+    }
+  };
+
+  const onSubmit = async (data, event) => {
+    
+    event.preventDefault();
+    try {
+      const res = await answerInquiry(user.token, inquiryId, data);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -41,6 +59,16 @@ function InquiryDetail() {
         <div>{inquiryState.inquiry.inquiryTitle}</div>
         <div>{inquiryState.inquiry.inquiryContent}</div>
         <div>{inquiryState.inquiry.inquiryTime}</div>
+        <div>{inquiryState.inquiry.inquiryAnswer}</div>
+
+        {user.userRole === "ADMIN" && (
+          <>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <input {...register("answer")} />
+              <button type="submit">전송</button>
+            </form>
+          </>
+        )}
       </>
     );
   };

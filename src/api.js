@@ -1,4 +1,5 @@
 const BASE_URL = "https://shoppingmall-app.herokuapp.com";
+const TEST_URL = "http://localhost:8080"
 
 export async function fetchSearchItemList(keyword) {
   return await (
@@ -73,9 +74,7 @@ export async function fetchInquiry({page, size}) {
 /* 문의사항 게시물 1개 요청 */
 export async function fetchInquiryDetail(inquiryId) {
   return await (
-    await fetch(
-      `${BASE_URL}/api/inquiry/${inquiryId}`,
-      {
+    await fetch(`${BASE_URL}/api/inquiry/${inquiryId}`, {
         method: "GET",
       }
     )
@@ -83,12 +82,25 @@ export async function fetchInquiryDetail(inquiryId) {
 }
 
 /* 문의사항 생성 */
-export async function createInquiry(data) {
-  return await fetch("https://jsonplaceholder.typicode.com/posts", {
+export async function createInquiry(token, data) {
+  return await fetch(`${TEST_URL}/api/inquiry/create`, {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
       "Content-type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+/* 문의사항 답변 */
+export async function answerInquiry(token, inquiryId, data) {
+  return await fetch(`${BASE_URL}/api/inquiry/${inquiryId}`, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${token}`,
     },
   });
 }

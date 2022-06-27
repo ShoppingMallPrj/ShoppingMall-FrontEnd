@@ -1,21 +1,41 @@
+import { createInquiry } from "../../api";
+import { useForm } from "react-hook-form";
+
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { useState, useEffect } from "react";
 
 function InquiryCreate() {
-  /* 최초 로딩 (페이지는 0부터 시작함) */
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm();
+
+  const onSubmit = async (data, event) => {
+    event.preventDefault();
+    try {
+      const token = JSON.parse(sessionStorage.getItem("user")).token;
+      const res = await createInquiry(token, data);
+      console.log(res)
+    } catch (error) {
+      console.log(error);
+    }
+  };  
 
   return (
     <>
       <Header />
       <main>
-        {/*title*/}
-        <div>제목</div>
-        <input></input>
-        {/*title*/}
-        <div>내용</div>
-        <input></input>
-
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>제목</div>
+          <input {...register("inquiryTitle")} />
+          <div>내용</div>
+          <input {...register("inquiryContent")} />
+          <button type="submit">전송</button>
+        </form>
       </main>
       <Footer />
     </>

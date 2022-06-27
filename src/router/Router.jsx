@@ -54,8 +54,8 @@ function Router() {
         <Route path="/order" element={<Order />} />
         <Route path="/inquiry" element={<Inquiry />} />
         <Route path="/inquiry/:inquiryId" element={<InquiryDetail />} />
-        <Route path="/inquiry/create" element={<InquiryCreate />} />
-        <Route path="/user" element={ <PrivateRoute> <User/> </PrivateRoute>}/>
+        <Route path="/inquiry/create" element={<PrivateRoute> <InquiryCreate/> </PrivateRoute>}/>
+        <Route path="/user" element={<PrivateRoute> <User/> </PrivateRoute>}/>
       </Routes>
     </Routers>
   );
