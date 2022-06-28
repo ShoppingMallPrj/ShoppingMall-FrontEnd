@@ -28,6 +28,7 @@ import Inquiry from "../pages/inquiry/Inquiry";
 import InquiryDetail from "../pages/inquiry/InquiryDetail";
 import InquiryCreate from "../pages/inquiry/InquiryCreate";
 import User from "../pages/user/User";
+import Cart from "../pages/cart/Cart";
 // import Components
 
 function Router() {
@@ -56,6 +57,7 @@ function Router() {
         <Route path="/inquiry/:inquiryId" element={<InquiryDetail />} />
         <Route path="/inquiry/create" element={<PrivateRoute> <InquiryCreate/> </PrivateRoute>}/>
         <Route path="/user" element={<PrivateRoute> <User/> </PrivateRoute>}/>
+        <Route path="/cart" element={<Cart/>}/>
       </Routes>
     </Routers>
   );

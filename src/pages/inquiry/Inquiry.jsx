@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { fetchInquiry, fetchInquiryDetail } from "../../api";
+import { fetchInquiry } from "../../api";
 import Pagenation from "../../components/Pagenation";
-
 
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";

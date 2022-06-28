@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import { useState, useEffect } from "react";
 
 function InquiryCreate() {
 

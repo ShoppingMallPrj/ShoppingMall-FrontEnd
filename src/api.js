@@ -61,6 +61,16 @@ export async function fetchCreateItem(data) {
   );
 }
 
+/* Item을 하나 읽어온다.*/
+export async function fetchItemDetail(itemId) {
+  return await fetch(`${BASE_URL}/api/item/${itemId}`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+});}
+
+
 /* 문의사항 데이터 리스트 요청 */
 export async function fetchInquiry({page, size}) {
   return await ( await fetch(
@@ -83,7 +93,7 @@ export async function fetchInquiryDetail(inquiryId) {
 
 /* 문의사항 생성 */
 export async function createInquiry(token, data) {
-  return await fetch(`${TEST_URL}/api/inquiry/create`, {
+  return await fetch(`${BASE_URL}/api/inquiry/create`, {
     method: "POST",
     body: JSON.stringify(data),
     headers: {

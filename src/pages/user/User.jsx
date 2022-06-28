@@ -28,7 +28,7 @@ function User() {
       setUserState((userState)=>({user: data, isLoading: false}))
     
     } catch {
-      setUserState((userState) => ({ ...useState, isError: false }));
+      setUserState((userState) => ({ ...userState, isError: false }));
     }
   }
 
@@ -58,7 +58,7 @@ function User() {
   const Body = () => {
 
     if (userState.isLoading) return <>LOADING...</>;
-    if (userState.isError) return <>Error</>;
+    if (userState.isError) return <>ERROR</>;
 
     return (
       <>
@@ -78,7 +78,6 @@ function User() {
         <MyModal></MyModal>
       </>
     );
-
   }
   
   return (
