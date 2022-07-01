@@ -137,3 +137,15 @@ export async function fetchUserUpdate(token, data) {
     },
   });
 }
+
+/* 주문 요청 (토큰 필요) */
+export async function fetchOrder(token, data) {
+  return await fetch(`${BASE_URL}/api/order/create`, {
+    method: "POST",
+    body: data,
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}

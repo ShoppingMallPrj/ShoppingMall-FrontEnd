@@ -23,7 +23,7 @@ import OuterWomens from "../pages/womens/OuterWomens";
 import ShoesWomens from "../pages/womens/ShoesWomens";
 import TopWomens from "../pages/womens/TopWomens";
 import ItemUpload from "../pages/ItemUpload";
-import Order from "../pages/Order";
+import Order from "../pages/order/Order";
 import Inquiry from "../pages/inquiry/Inquiry";
 import InquiryDetail from "../pages/inquiry/InquiryDetail";
 import InquiryCreate from "../pages/inquiry/InquiryCreate";

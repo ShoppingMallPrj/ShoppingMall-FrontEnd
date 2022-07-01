@@ -1,5 +1,6 @@
 
 import styled from "styled-components";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { fetchItemDetail } from "../../api";
 
@@ -13,6 +14,7 @@ const styledImage = styled.img`
 `;
 
 function Cart() {
+  const navigate = useNavigate();
   const [cartState, setCartState] = useState({
     cartItems: [],
     isLoading: false,
@@ -102,7 +104,8 @@ function Cart() {
   useEffect(() => {
     window.localStorage.setItem("cart", JSON.stringify(cartState.cartItems));
   }, [cartState.cartItems]);
-
+ 
+  /*테이블의 아이템 정보 부분 */
   const ItemInfo = ({ item, index }) => {
     return (
       <>
@@ -129,7 +132,8 @@ function Cart() {
       </>
     );
   };
-
+  
+  /* 상품 총 합계 계산하는 함수 */
   const Total = () => {
     let total = 0;
     cartState.cartItems.forEach((item)=>{
@@ -198,11 +202,27 @@ function Cart() {
     );
   };
 
+  //선택된 아이템만 가져와서 order page로 이동
+  const toOrder = () => {
+  
+    const item = cartState.cartItems.filter((item)=>
+      item.isSelected === true
+    )
+    if(item.length === 0) return;
+    
+    navigate("/order", {
+      state: {
+        item: item,
+      },
+    });
+  } 
+
   return (
     <>
       <Header />
       <Body />
       <Total/>
+      <button onClick={toOrder}>주문하기</button>
       <Footer />
     </>
   );
