@@ -152,7 +152,7 @@ export async function fetchOrder(token, data) {
 
 /*유저 주문 요청 (토큰 필요) */
 export async function fetchUserOrder(token, page, size) {
-  return await fetch(`${TEST_URL}/api/order/user/?page=${page}&size=${size}&sort=orderId,desc`, {
+  return await fetch(`${BASE_URL}/api/order/user/?page=${page}&size=${size}&sort=orderId,desc`, {
     method: "GET",
     headers: {
       "Content-type": "application/json; charset=UTF-8",
