@@ -9,6 +9,7 @@ import { fetchUser } from "../../api";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import UserUpdate from "./UserUpdate";
+import OrderList from "./OrderList";
 
 function User() {
 
@@ -84,8 +85,8 @@ function User() {
     <>
       <Header/>
       <main> 
-        <Body>
-        </Body>
+        <Body/>
+        <OrderList/>
       </main>
       <Footer/>
     </>

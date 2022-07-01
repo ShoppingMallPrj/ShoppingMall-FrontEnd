@@ -1,10 +1,12 @@
 import styled from "styled-components";
+
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { fetchOrder } from "../../api";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import OrderForm from "./OrderForm";
+
 function Order() {
 
   const { state } = useLocation();
