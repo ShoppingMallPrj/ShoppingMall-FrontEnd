@@ -11,7 +11,7 @@ const SortForm = styled.form`
   grid-template-rows: repeat(4, 1fr);
   gap: 2rem;
   padding: 0 2rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
 `;
 const SortCheckbox = styled.input.attrs({ type: "radio" })``;
 const SortLabel = styled.label`
@@ -81,8 +81,8 @@ function AdminSortOption() {
             onChange={onChangeGender}
             name="gender"
             id="Men"
-            value="mens"
-            checked={gender.genderName === "mens" && gender.checked}
+            value="m"
+            checked={gender.genderName === "m" && gender.checked}
           />
           Men
         </SortLabel>
@@ -91,8 +91,8 @@ function AdminSortOption() {
             onChange={onChangeGender}
             name="gender"
             id="Women"
-            value="womens"
-            checked={gender.genderName === "womens" && gender.checked}
+            value="w"
+            checked={gender.genderName === "w" && gender.checked}
           />
           Women
         </SortLabel>
