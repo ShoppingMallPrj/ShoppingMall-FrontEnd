@@ -133,6 +133,19 @@ function AdminItemUpload() {
         />
         <JoinError>{errors?.itemCategory?.message}</JoinError>
 
+        <JoinInput
+          type="text"
+          placeholder="gender"
+          {...register("gender", {
+            required: "gender is required",
+            minLength: {
+              value: 1,
+              message: "gender must be at least 1 digits",
+            },
+          })}
+        />
+        <JoinError>{errors?.gender?.message}</JoinError>
+
         {/* 아이템 설명 */}
         <JoinInput
           type="text"
@@ -160,7 +173,7 @@ function AdminItemUpload() {
         {/* 이미지 프로필 업로드 */}
         <input
           type="file"
-          accept="image/jpg,image/png,image/jpeg,image/gif"
+          accept="image/jpg,image/png,image/jpeg,image/gif,image/webp"
           name="profile"
           onChange={onProfile}
         ></input>
