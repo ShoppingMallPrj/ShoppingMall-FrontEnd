@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { ItemListState } from "../../atoms";
 import AdminSortOption from "../../components/AdminSortOption";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -64,6 +65,9 @@ const ItemInfo = styled.span`
   font-size: 1.2rem;
 `;
 const SortMenu = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 21rem;
   height: 87rem;
   border: 1px solid black;
@@ -77,6 +81,16 @@ const SortTitle = styled.div`
   height: 4rem;
   font-size: 1.4rem;
   font-weight: 600;
+`;
+const AddNewItem = styled.div`
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-top: 50rem;
+
+  a {
+    padding: 0.5rem 1.5rem;
+    border-bottom: 1px solid black;
+  }
 `;
 
 function AdminItemList() {
@@ -120,6 +134,9 @@ function AdminItemList() {
           <SortMenu>
             <SortTitle>Sort</SortTitle>
             <AdminSortOption />
+            <AddNewItem>
+              <Link to={"/admin/item/upload"}>Add New Item</Link>
+            </AddNewItem>
           </SortMenu>
         </Container>
       </main>

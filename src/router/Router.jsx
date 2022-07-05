@@ -17,15 +17,12 @@ import NewArrivalsWomens from "../pages/womens/NewArrivalsWomens";
 import OuterWomens from "../pages/womens/OuterWomens";
 import ShoesWomens from "../pages/womens/ShoesWomens";
 import TopWomens from "../pages/womens/TopWomens";
-
-import ItemUpload from "../pages/admin/AdminItemUpload AdminItemUpload";
 import Order from "../pages/Order";
 import Inquiry from "../pages/inquiry/Inquiry";
 import InquiryDetail from "../pages/inquiry/InquiryDetail";
 import InquiryCreate from "../pages/inquiry/InquiryCreate";
-import Admin from "../pages/admin/AdminItemList";
 import AdminItemList from "../pages/admin/AdminItemList";
-import AdminItemUpload from "../pages/admin/AdminItemUpload AdminItemUpload";
+import AdminItemUpload from "../pages/admin/AdminItemUpload";
 import AdminOrderList from "../pages/admin/AdminOrderList";
 // import Components
 
