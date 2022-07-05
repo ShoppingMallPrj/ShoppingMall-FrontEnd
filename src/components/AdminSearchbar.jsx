@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { fetchItemList } from "../api";
+import { fetchSearchItemList } from "../api";
 import { ReactComponent as SearchGlass } from "../assets/logo/searchGlass.svg";
 import { ReactComponent as XSolid } from "../assets/logo/x-solid.svg";
 import { ItemListState } from "../atoms";
@@ -41,7 +41,7 @@ function AdminSearchbar() {
     isLoading,
     data: dataList,
     refetch,
-  } = useQuery("SearchedItemList", () => fetchItemList(keyword));
+  } = useQuery("SearchedItemList", () => fetchSearchItemList(keyword));
   const onSubmit = (data, event) => {
     setKeyword(data.keyword);
     event.target[0].value = "";
