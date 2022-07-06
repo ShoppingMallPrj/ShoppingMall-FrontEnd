@@ -1,5 +1,5 @@
 import ImageUploading from "react-images-uploading";
-import { fetchCreateItem } from "../api";
+import { fetchCreateItem } from "../../api";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -36,7 +36,7 @@ const JoinInput = styled.input`
 
 const JoinError = styled.span``;
 
-function ItemUpload() {
+function AdminItemUpload() {
   const {
     register,
     handleSubmit,
@@ -76,32 +76,32 @@ function ItemUpload() {
 
     /* 서버에 전송 */
     try {
-        const res = await fetchCreateItem(formData);
-        console.log(res);
+      const res = await fetchCreateItem(formData);
+      console.log(res);
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
 
     event.preventDefault();
   };
-  
+
   // 프로필 업로더
   const onProfile = (e) => {
     console.log(e.target.files[0]);
     setProfile(e.target.files[0]);
-  }
+  };
 
   //이미지 업로드 시 call
   const imageChange = (imageList, addUpdateIndex) => {
     // data for submit
     console.log(imageList, addUpdateIndex);
     setImages(imageList);
-  };  
+  };
 
   const optionChange = (optionList) => {
     console.log(optionList);
     setOptions(optionList);
-  }
+  };
 
   return (
     <>
@@ -133,6 +133,19 @@ function ItemUpload() {
         />
         <JoinError>{errors?.itemCategory?.message}</JoinError>
 
+        <JoinInput
+          type="text"
+          placeholder="gender"
+          {...register("gender", {
+            required: "gender is required",
+            minLength: {
+              value: 1,
+              message: "gender must be at least 1 digits",
+            },
+          })}
+        />
+        <JoinError>{errors?.gender?.message}</JoinError>
+
         {/* 아이템 설명 */}
         <JoinInput
           type="text"
@@ -160,7 +173,7 @@ function ItemUpload() {
         {/* 이미지 프로필 업로드 */}
         <input
           type="file"
-          accept="image/jpg,image/png,image/jpeg,image/gif"
+          accept="image/jpg,image/png,image/jpeg,image/gif,image/webp"
           name="profile"
           onChange={onProfile}
         ></input>
@@ -220,12 +233,11 @@ function ItemUpload() {
 }
 
 /* 옵션 업로드 하는 컴포넌트 */
-function OptionUploader({onChange}) {
-  
+function OptionUploader({ onChange }) {
   const [inputs, setInputs] = useState({
     optionContent: "",
     optionStock: "",
-  });  
+  });
 
   const [options, setOptions] = useState([]); //아이템 옵션 배열
 
@@ -243,22 +255,21 @@ function OptionUploader({onChange}) {
 
   //항목 추가
   const onAdd = () => {
-    
-    if(inputs.optionContent === "" || inputs.optionStock === 0) return;
+    if (inputs.optionContent === "" || inputs.optionStock === 0) return;
 
-    setOptions( (options) => [...options, inputs])
+    setOptions((options) => [...options, inputs]);
     onChange(options);
     setInputs({
       optionContent: "",
       optionStock: 0,
-    });    
-  }
+    });
+  };
 
   /* 항목 삭제 */
   const onDelete = (i) => {
-    setOptions((options) => options.filter((optoion, index) => index !== i))
+    setOptions((options) => options.filter((optoion, index) => index !== i));
     onChange(options);
-  }
+  };
 
   return (
     <>
@@ -298,4 +309,4 @@ function OptionUploader({onChange}) {
   );
 }
 
-export default ItemUpload;
+export default AdminItemUpload;

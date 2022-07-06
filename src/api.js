@@ -1,13 +1,25 @@
 const BASE_URL = "https://shoppingmall-app.herokuapp.com";
-const TEST_URL = "http://localhost:8080"
+const TEST_URL = "http://localhost:8080";
 
-export async function fetchSearchItemList(keyword) {
+export async function fetchNewArriavlsMens() {
   return await (
-    await fetch(`${BASE_URL}/api/item/list?keyword=${keyword}`)
+    await fetch(`${BASE_URL}/api/item/list?keyword=&gender=`)
   ).json();
 }
-export async function fetchNewArriavlsMens() {
-  return await (await fetch(`${BASE_URL}/api/item/list?keyword=`)).json();
+export async function fetchSearchItemList(keyword) {
+  return await (
+    await fetch(`${BASE_URL}/api/item/list/search?keyword=${keyword}`)
+  ).json();
+}
+export async function fetchItemList(keyword = "", gender = "") {
+  return await (
+    await fetch(
+      `${BASE_URL}/api/item/list/?keyword=${keyword}&gender=${gender}`
+    )
+  ).json();
+}
+export async function fetchItemInfo(id) {
+  return await (await fetch(`${BASE_URL}/api/item/${id}`)).json();
 }
 export async function fetchUserEmailJoin(data) {
   return await fetch(`${BASE_URL}/api/user/create`, {
@@ -28,19 +40,12 @@ export async function fetchUserEmailLogin(data) {
   });
 }
 export async function fetchUserKakaoLogin(code) {
-  return await (await fetch(`${BASE_URL}/api/login/kakao?code=${code}`)).json();
+  return await fetch(`${BASE_URL}/api/login/kakao?code=${code}`);
 }
 export async function fetchUserGoogleLogin(tokenId) {
-  return await (
-    await fetch(`${BASE_URL}/api/login/google?tokenId=${tokenId}`)
-  ).json();
+  return await fetch(`${BASE_URL}/api/login/google?tokenId=${tokenId}`);
 }
 // fetch Test Data
-export async function fetchGetTestData() {
-  const response = await fetch("https://jsonplaceholder.typicode.com/posts/1");
-  const json = await response.json();
-  return json;
-}
 export async function fetchCreateTestData(data) {
   return await fetch("https://jsonplaceholder.typicode.com/posts", {
     method: "POST",
@@ -53,12 +58,10 @@ export async function fetchCreateTestData(data) {
 
 //form dat를 받아와 아이템을 등록한다.
 export async function fetchCreateItem(data) {
-  return await (
-    await fetch(`${BASE_URL}/api/item/create`, {
-      method: "POST",
-      body: data,
-    })
-  );
+  return await fetch(`${BASE_URL}/api/item/create`, {
+    method: "POST",
+    body: data,
+  });
 }
 
 /* Item을 하나 읽어온다.*/
@@ -68,27 +71,28 @@ export async function fetchItemDetail(itemId) {
     headers: {
       "Content-type": "application/json; charset=UTF-8",
     },
-});}
-
+  });
+}
 
 /* 문의사항 데이터 리스트 요청 */
-export async function fetchInquiry({page, size}) {
-  return await ( await fetch(
-    `${BASE_URL}/api/inquiry/list?page=${page}&size=${size}&sort=inquiryId,desc`,
-    {
-      method: "GET",
-    }
-  )).json();
+export async function fetchInquiry({ page, size }) {
+  return await (
+    await fetch(
+      `${BASE_URL}/api/inquiry/list?page=${page}&size=${size}&sort=inquiryId,desc`,
+      {
+        method: "GET",
+      }
+    )
+  ).json();
 }
 
 /* 문의사항 게시물 1개 요청 */
 export async function fetchInquiryDetail(inquiryId) {
   return await (
-    await fetch(`${BASE_URL}/api/inquiry/${inquiryId}`, {
-        method: "GET",
-      }
-    )
-  ).json();  
+    await fetch(`${BASE_URL}/api/inquiry/${inquiryId}?pw=${pw}?`, {
+      method: "GET",
+    })
+  ).json();
 }
 
 /* 문의사항 생성 */
@@ -152,11 +156,14 @@ export async function fetchOrder(token, data) {
 
 /*유저 주문 요청 (토큰 필요) */
 export async function fetchUserOrder(token, page, size) {
-  return await fetch(`${BASE_URL}/api/order/user/?page=${page}&size=${size}&sort=orderId,desc`, {
-    method: "GET",
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  return await fetch(
+    `${BASE_URL}/api/order/user/?page=${page}&size=${size}&sort=orderId,desc`,
+    {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 }

@@ -63,12 +63,7 @@ a {
   text-decoration: none;
   color: inherit;
 }
-header {
-  display: flex;
-  justify-content: center;
-  min-width: 144rem;
-}
-footer {
+header, footer, main{
   display: flex;
   justify-content: center;
   min-width: 144rem;

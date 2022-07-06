@@ -22,7 +22,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 47.6rem;
   margin-bottom: 82.8rem;
+  min-width: 144rem;
 `;
 const LoginTitle = styled.h1`
   font-size: 1.7rem;
@@ -33,7 +35,7 @@ const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
   width: 30rem;
-  height: 31rem;
+  height: 12.5rem;
   margin-bottom: 2rem;
 `;
 const LoginInput = styled.input`
@@ -72,15 +74,36 @@ const LoginText = styled.span`
   text-transform: uppercase;
   margin-bottom: 2rem;
 `;
-const SocialLogins = styled.div``;
-const KakaoLink = styled(KaKaoOauth)`
-  width: 13rem;
-  height: 3rem;
+const SocialLogins = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
 `;
-const KakaoLogin = styled.img``;
-const GoogleLink = styled(GoogleOauth)`
-  width: 13rem;
+const KakaoLink = styled(KaKaoOauth)`
+  width: 14rem !important;
+  height: 3rem !important;
+`;
+const KakaoLogin = styled.img`
+  width: 14rem;
   height: 3rem;
+  box-shadow: rgb(0 0 0 / 24%) 0px 2px 2px 0px, rgb(0 0 0 / 24%) 0px 0px 1px 0px;
+`;
+const GoogleLink = styled(GoogleOauth)`
+  width: 15rem;
+  height: 3rem;
+  margin-left: 1.5rem;
+
+  span {
+    font-size: 0.5rem;
+    margin-left: 0.5rem;
+  }
+  div {
+    display: flex;
+    align-items: center;
+    height: 3rem;
+    margin-right: 0px !important;
+    margin-left: 0.5rem;
+  }
 `;
 
 function Login() {
@@ -103,9 +126,12 @@ function Login() {
         setLogin(() => {
           return { user: true, token: json.token };
         });
-        
-        if(state){navigate(state);}
-        else {navigate("/");}
+
+        if (state) {
+          navigate(state);
+        } else {
+          navigate("/");
+        }
       }
     },
   });
@@ -113,15 +139,31 @@ function Login() {
     event.preventDefault();
     mutate(data);
   };
+  const onLogin = async (data) => {
+    const json = await data.json();
+    if (data.ok) {
+      sessionStorage.setItem(
+        "user",
+        JSON.stringify({
+          user: true,
+          token: json.token,
+        })
+      );
+      setLogin(() => {
+        return { user: true, userRole: json.userRole, token: json.token };
+      });
+      navigate("/");
+    }
+  };
   const onSuccessKakaoLogin = async (response) => {
     const tokenId = response.response.access_token;
     const data = await fetchUserKakaoLogin(tokenId);
-    console.log(data);
+    onLogin(data);
   };
   const onSuccessGooglLogin = async (response) => {
     const tokenId = response.tokenId;
     const data = await fetchUserGoogleLogin(tokenId);
-    console.log(data);
+    onLogin(data);
   };
   return (
     <>
@@ -155,7 +197,7 @@ function Login() {
             </KakaoLink>
             <GoogleLink
               clientId={CLIENT_ID_GOOGLE}
-              buttonText="Login"
+              buttonText="Login With Google"
               onSuccess={onSuccessGooglLogin}
               onFailure={console.error}
               cookiePolicy={"single_host_origin"}

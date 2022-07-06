@@ -10,6 +10,7 @@ import Search from "../pages/Search";
 import Home from "../pages/Home";
 import Join from "../pages/Join";
 import Login from "../pages/Login";
+import Item from "../pages/Item";
 import AccMens from "../pages/mens/AccMens";
 import BottomMens from "../pages/mens/BottomMens";
 import NewArrivalsMens from "../pages/mens/NewArrivalsMens";
@@ -22,13 +23,13 @@ import NewArrivalsWomens from "../pages/womens/NewArrivalsWomens";
 import OuterWomens from "../pages/womens/OuterWomens";
 import ShoesWomens from "../pages/womens/ShoesWomens";
 import TopWomens from "../pages/womens/TopWomens";
-import ItemUpload from "../pages/ItemUpload";
-import Order from "../pages/order/Order";
+import Order from "../pages/Order";
 import Inquiry from "../pages/inquiry/Inquiry";
 import InquiryDetail from "../pages/inquiry/InquiryDetail";
 import InquiryCreate from "../pages/inquiry/InquiryCreate";
-import User from "../pages/user/User";
-import Cart from "../pages/cart/Cart";
+import AdminItemList from "../pages/admin/AdminItemList";
+import AdminItemUpload from "../pages/admin/AdminItemUpload";
+import AdminOrderList from "../pages/admin/AdminOrderList";
 // import Components
 
 function Router() {
@@ -51,13 +52,14 @@ function Router() {
         <Route path="/womens/bottom" element={<BottomWomens />} />
         <Route path="/womens/shoes" element={<ShoesWomens />} />
         <Route path="/womens/acc" element={<AccWomens />} />
-        <Route path="/item/upload" element={<ItemUpload />} />
+        <Route path="/item/:name" element={<Item />} />
+        <Route path="/admin/item" element={<AdminItemList />} />
+        <Route path="/admin/item/upload" element={<AdminItemUpload />} />
+        <Route path="/admin/order" element={<AdminOrderList />} />
         <Route path="/order" element={<Order />} />
         <Route path="/inquiry" element={<Inquiry />} />
         <Route path="/inquiry/:inquiryId" element={<InquiryDetail />} />
-        <Route path="/inquiry/create" element={<PrivateRoute> <InquiryCreate/> </PrivateRoute>}/>
-        <Route path="/user" element={<PrivateRoute> <User/> </PrivateRoute>}/>
-        <Route path="/cart" element={<Cart/>}/>
+        <Route path="/inquiry/create" element={<InquiryCreate />} />
       </Routes>
     </Routers>
   );
@@ -65,7 +67,6 @@ function Router() {
 
 /* 페이지 진입에 로그인 권한이 필요할 경우 사용 */
 const PrivateRoute = ({ children }) => {
-    
   const user = sessionStorage.getItem("user");
   const location = useLocation();
 

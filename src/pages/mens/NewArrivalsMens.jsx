@@ -17,6 +17,7 @@ import mensNewArrivals9 from "../../assets/mens/new-arrivals/shoes1.webp";
 import mensNewArrivals10 from "../../assets/mens/new-arrivals/mens_outer4.webp";
 import mensNewArrivals11 from "../../assets/mens/new-arrivals/mens_bottom4.webp";
 import mensNewArrivals12 from "../../assets/mens/new-arrivals/mens_outer5.webp";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: grid;
@@ -56,18 +57,22 @@ const Text = styled.span`
 
 function NewArrivalsMens() {
   const { isLoading, data } = useQuery("newArrivalsMens", fetchNewArriavlsMens);
-  console.log(data);
   return (
     <>
       <Header />
       <main>
         <Container>
           <Contents>
-            <Img src={mensNewArrivals}></Img>
-            <Texts>
-              <Text>TAVERN BLAZER GREY TROPICAL WOOL</Text>
-              <Text>₩ 759,000</Text>
-            </Texts>
+            <Link
+              to={"/item/tavern-blazer-grey-tropical-woll"}
+              state={{ id: data?.content[0].itemId }}
+            >
+              <Img src={mensNewArrivals}></Img>
+              <Texts>
+                <Text>TAVERN BLAZER GREY TROPICAL WOOL</Text>
+                <Text>₩ 759,000</Text>
+              </Texts>
+            </Link>
           </Contents>
           <Contents>
             <Img src={mensNewArrivals2}></Img>
