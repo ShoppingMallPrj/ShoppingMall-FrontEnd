@@ -5,7 +5,22 @@ import { useForm } from "react-hook-form";
 
 import styled from "styled-components";
 import { useEffect } from "react";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 95rem;
+  min-width: 144rem;
+  margin-bottom: 22rem;
+`;
+const JoinTitle = styled.h1`
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin-bottom: 6.5rem;
+`;
 const JoinForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -33,6 +48,23 @@ const JoinInput = styled.input`
     /* background-color: transparent; */
   }
 `;
+const JoinButton = styled.button`
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid black;
+  padding-bottom: 0.5rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+  &:last-child() {
+    font-weight: 600;
+  }
+`;
+const JoinOption = styled.div`
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.3rem;
+`;
+const JoinOptionContent = styled.div``;
 
 const JoinError = styled.span``;
 
@@ -105,129 +137,135 @@ function AdminItemUpload() {
 
   return (
     <>
-      <JoinForm onSubmit={handleSubmit(onSubmit)}>
-        <JoinInput
-          type="text"
-          placeholder="itemName"
-          {...register("itemName", {
-            required: "itemName is required",
-            minLength: {
-              value: 3,
-              message: "itemName must be at least 3 digits",
-            },
-          })}
-        />
-        <JoinError>{errors?.itemName?.message}</JoinError>
+      <Header />
+      <main>
+        <Container>
+          <JoinTitle>Add New Item</JoinTitle>
+          <JoinForm onSubmit={handleSubmit(onSubmit)}>
+            <JoinInput
+              type="text"
+              placeholder="Name"
+              {...register("itemName", {
+                required: "itemName is required",
+                minLength: {
+                  value: 3,
+                  message: "itemName must be at least 3 digits",
+                },
+              })}
+            />
+            <JoinError>{errors?.itemName?.message}</JoinError>
 
-        {/* 아이템 카테고리 */}
-        <JoinInput
-          type="text"
-          placeholder="itemCategory"
-          {...register("itemCategory", {
-            required: "itemCategory is required",
-            minLength: {
-              value: 3,
-              message: "itemCategory must be at least 3 digits",
-            },
-          })}
-        />
-        <JoinError>{errors?.itemCategory?.message}</JoinError>
+            {/* 아이템 카테고리 */}
+            <JoinInput
+              type="text"
+              placeholder="Category"
+              {...register("itemCategory", {
+                required: "itemCategory is required",
+                minLength: {
+                  value: 3,
+                  message: "itemCategory must be at least 3 digits",
+                },
+              })}
+            />
+            <JoinError>{errors?.itemCategory?.message}</JoinError>
 
-        <JoinInput
-          type="text"
-          placeholder="gender"
-          {...register("gender", {
-            required: "gender is required",
-            minLength: {
-              value: 1,
-              message: "gender must be at least 1 digits",
-            },
-          })}
-        />
-        <JoinError>{errors?.gender?.message}</JoinError>
+            <JoinInput
+              type="text"
+              placeholder="gender"
+              {...register("gender", {
+                required: "gender is required",
+                minLength: {
+                  value: 1,
+                  message: "gender must be at least 1 digits",
+                },
+              })}
+            />
+            <JoinError>{errors?.gender?.message}</JoinError>
 
-        {/* 아이템 설명 */}
-        <JoinInput
-          type="text"
-          placeholder="itemDescription"
-          {...register("itemDescription", {
-            required: "itemDescription is required",
-            minLength: {
-              value: 3,
-              message: "itemCategory must be at least 3 digits",
-            },
-          })}
-        />
-        <JoinError>{errors?.itemDescription?.message}</JoinError>
+            {/* 아이템 설명 */}
+            <JoinInput
+              type="text"
+              placeholder="Description"
+              {...register("itemDescription", {
+                required: "itemDescription is required",
+                minLength: {
+                  value: 3,
+                  message: "itemCategory must be at least 3 digits",
+                },
+              })}
+            />
+            <JoinError>{errors?.itemDescription?.message}</JoinError>
 
-        {/* 아이템 가격 */}
-        <JoinInput
-          type="number"
-          placeholder="itemPrice"
-          {...register("itemPrice", {
-            required: "itemPrice is required",
-          })}
-        />
-        <JoinError>{errors?.itemPrice?.message}</JoinError>
+            {/* 아이템 가격 */}
+            <JoinInput
+              type="number"
+              placeholder="Price"
+              {...register("itemPrice", {
+                required: "itemPrice is required",
+              })}
+            />
+            <JoinError>{errors?.itemPrice?.message}</JoinError>
 
-        {/* 이미지 프로필 업로드 */}
-        <input
-          type="file"
-          accept="image/jpg,image/png,image/jpeg,image/gif,image/webp"
-          name="profile"
-          onChange={onProfile}
-        ></input>
+            {/* 이미지 프로필 업로드 */}
+            <input
+              type="file"
+              accept="image/jpg,image/png,image/jpeg,image/gif,image/webp"
+              name="profile"
+              onChange={onProfile}
+            ></input>
 
-        {/* 이미지 업로드 (외부 라이브러리 사용) */}
-        <ImageUploading
-          multiple
-          value={images}
-          onChange={imageChange}
-          maxNumber={5}
-          dataURLKey="data_url"
-        >
-          {({
-            imageList,
-            onImageUpload,
-            onImageRemoveAll,
-            onImageUpdate,
-            onImageRemove,
-            isDragging,
-            dragProps,
-          }) => (
-            // write your building UI
-            <div className="upload__image-wrapper">
-              <button
-                type="button"
-                style={isDragging ? { color: "red" } : undefined}
-                onClick={onImageUpload}
-                {...dragProps}
-              >
-                Click or Drop here
-              </button>
-              &nbsp;
-              <button type="button" onClick={onImageRemoveAll}>
-                Remove all images
-              </button>
-              {imageList.map((image, index) => (
-                <div key={index} className="image-item">
-                  <img src={image["data_url"]} alt="" width="100" />
-                  <div className="image-item__btn-wrapper">
-                    <button type="button" onClick={() => onImageUpdate(index)}>
-                      Update
-                    </button>
-                    <button type="button" onClick={() => onImageRemove(index)}>
-                      Remove
-                    </button>
-                  </div>
+            {/* 이미지 업로드 (외부 라이브러리 사용) */}
+            <ImageUploading
+              multiple
+              value={images}
+              onChange={imageChange}
+              maxNumber={5}
+              dataURLKey="data_url"
+            >
+              {({
+                imageList,
+                onImageUpload,
+                onImageRemoveAll,
+                onImageUpdate,
+                onImageRemove,
+                isDragging,
+                dragProps,
+              }) => (
+                // write your building UI
+                <div className="upload__image-wrapper">
+                  <JoinButton
+                    style={isDragging ? { color: "red" } : undefined}
+                    onClick={onImageUpload}
+                    {...dragProps}
+                  >
+                    Click or Drop here
+                  </JoinButton>
+                  &nbsp;
+                  <JoinButton onClick={onImageRemoveAll}>
+                    Remove all images
+                  </JoinButton>
+                  {imageList.map((image, index) => (
+                    <div key={index} className="image-item">
+                      <img src={image["data_url"]} alt="" width="100" />
+                      <div className="image-item__btn-wrapper">
+                        <JoinButton onClick={() => onImageUpdate(index)}>
+                          Update
+                        </JoinButton>
+                        <JoinButton onClick={() => onImageRemove(index)}>
+                          Remove
+                        </JoinButton>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          )}
-        </ImageUploading>
-        <OptionUploader onChange={optionChange} />
-        <button type="submit">등록</button>
-      </JoinForm>
+              )}
+            </ImageUploading>
+            <OptionUploader onChange={optionChange} />
+            <JoinButton type="submit">Add New Item</JoinButton>
+          </JoinForm>
+        </Container>
+      </main>
+      <Footer />
     </>
   );
 }
@@ -273,38 +311,37 @@ function OptionUploader({ onChange }) {
 
   return (
     <>
+      <JoinInput
+        name="optionContent"
+        placeholder="Options"
+        onChange={onTextChange}
+        value={inputs.optionContent}
+      />
+      <JoinInput
+        type="number"
+        name="optionStock"
+        placeholder="Number"
+        onChange={onTextChange}
+        value={inputs.optionStock}
+      />
+      <JoinButton onClick={onAdd}>Add New Option</JoinButton>
       {options.map((option, index) => {
         return (
-          <div>
-            <div>항목 : {option.optionContent}</div>
-            <div>수량 : {option.optionStock}</div>
-            <button
-              type="button"
+          <JoinOption>
+            <JoinOptionContent>
+              Content : {option.optionContent}
+            </JoinOptionContent>
+            <JoinOptionContent>Stock : {option.optionStock}</JoinOptionContent>
+            <JoinButton
               onClick={() => {
                 onDelete(index);
               }}
             >
-              삭제
-            </button>
-          </div>
+              Delete
+            </JoinButton>
+          </JoinOption>
         );
       })}
-      <input
-        name="optionContent"
-        placeholder="옵션 항목"
-        onChange={onTextChange}
-        value={inputs.optionContent}
-      />
-      <input
-        type="number"
-        name="optionStock"
-        placeholder="10"
-        onChange={onTextChange}
-        value={inputs.optionStock}
-      />
-      <button type="button" onClick={onAdd}>
-        옵션 등록
-      </button>
     </>
   );
 }
