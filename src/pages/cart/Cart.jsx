@@ -1,4 +1,3 @@
-
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -20,7 +19,7 @@ function Cart() {
     isLoading: false,
     isError: false,
   });
-  const [isAllChecked, setIsAllChecked] = useState(false)
+  const [isAllChecked, setIsAllChecked] = useState(false);
 
   //데이터 하나 요청해서 로컬 스토리지에 넣는다.
   const testFetch = async () => {
@@ -69,9 +68,9 @@ function Cart() {
     let isChecked = event.target.checked;
     setIsAllChecked(isChecked);
     const newState = cartState.cartItems;
-    newState.forEach((item)=> {
+    newState.forEach((item) => {
       item.isSelected = isChecked;
-    })
+    });
     setCartState((state) => ({ ...state, cartItems: newState }));
   };
 
@@ -81,7 +80,6 @@ function Cart() {
     const newState = cartState.cartItems;
     newState[index].isSelected = isChecked;
     setCartState((state) => ({ ...state, cartItems: newState }));
-
   };
 
   //해당 아이템 카트에서 삭제
@@ -104,12 +102,16 @@ function Cart() {
   useEffect(() => {
     window.localStorage.setItem("cart", JSON.stringify(cartState.cartItems));
   }, [cartState.cartItems]);
- 
+
   /*테이블의 아이템 정보 부분 */
   const ItemInfo = ({ item, index }) => {
     return (
       <>
-        <img style={{height: "100px", width: "100px"}}  src={item.itemProfile} alt="image" />
+        <img
+          style={{ height: "100px", width: "100px" }}
+          src={item.itemProfile}
+          alt="image"
+        />
         <div>{item.itemName}</div>
         <div>
           option :
@@ -132,17 +134,17 @@ function Cart() {
       </>
     );
   };
-  
+
   /* 상품 총 합계 계산하는 함수 */
   const Total = () => {
     let total = 0;
-    cartState.cartItems.forEach((item)=>{
-      if(item.isSelected) {
+    cartState.cartItems.forEach((item) => {
+      if (item.isSelected) {
         total += item.itemPrice * item.quantity;
       }
-    })
-    return <>total : {total}</>
-  }
+    });
+    return <>total : {total}</>;
+  };
 
   const Body = () => {
     if (cartState.isLoading) return <>LOADING...</>;
@@ -181,7 +183,7 @@ function Cart() {
                     />
                   </td>
                   <td>
-                    <ItemInfo item={item} index={index}/>
+                    <ItemInfo item={item} index={index} />
                   </td>
                   <td>{item.itemPrice} WON</td>
                   <td>
@@ -204,24 +206,21 @@ function Cart() {
 
   //선택된 아이템만 가져와서 order page로 이동
   const toOrder = () => {
-  
-    const item = cartState.cartItems.filter((item)=>
-      item.isSelected === true
-    )
-    if(item.length === 0) return;
-    
+    const item = cartState.cartItems.filter((item) => item.isSelected === true);
+    if (item.length === 0) return;
+
     navigate("/order", {
       state: {
         item: item,
       },
     });
-  } 
+  };
 
   return (
     <>
       <Header />
       <Body />
-      <Total/>
+      <Total />
       <button onClick={toOrder}>주문하기</button>
       <Footer />
     </>
