@@ -87,7 +87,7 @@ function Header() {
                 )}
               </NavList>
               <NavList>
-                <Link to={"/contact"}>Contact</Link>
+                <Link to={"/inquiry"}>Q&A</Link>
               </NavList>
               <NavList onClick={switchSidebar}>Store</NavList>
             </Nav>
@@ -114,7 +114,7 @@ function Header() {
                 <Link to={"/cart"}>Cart</Link>
               </NavList>
               <NavList>
-                <Link to={"/contact"}>Contact</Link>
+                <Link to={"/inquiry"}>Q&A</Link>
               </NavList>
               <NavList onClick={switchSidebar}>Store</NavList>
             </Nav>
