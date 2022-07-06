@@ -56,7 +56,6 @@ const Text = styled.span`
 
 function AccMens() {
   const { isLoading, data } = useQuery("AccMens", fetchNewArriavlsMens);
-  console.log(data);
   return (
     <>
       <Header />

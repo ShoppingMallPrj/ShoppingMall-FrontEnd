@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import styled, {css} from "styled-components";
+import styled, { css } from "styled-components";
 
 export default function Pagenation({
   onChange = async (num) => {}, //페이지 변경 시 call
@@ -10,18 +10,17 @@ export default function Pagenation({
   hideOnSingle = false, //페이지가 하나만 있을 경우 표시
   hideNav = false, // next, prev 버튼 숨김
 }) {
-
   const isNotSingle = total !== 1;
 
   //현재 페이지
   const [current, setCurrent] = useState(defaultCurrent);
- 
+
   //페이지 눌리면 call
-  const onClick = async (pageNum) => {
-    
-    if(pageNum === current) return;
-    setCurrent((page)=> pageNum);
-    await onChange(pageNum);
+  const onClick = (pageNum) => {
+    if (pageNum === current) return;
+
+    setCurrent(pageNum);
+    onChange(pageNum);
   };
 
   const pages = [];
@@ -68,12 +67,9 @@ export default function Pagenation({
 }
 
 const PageDiv = styled.div`
-    
   display: flex;
-`
-const Prev = styled.div`
-    
-`
+`;
+const Prev = styled.div``;
 
 const Page = styled.div`
   color: #b1b1b1;
