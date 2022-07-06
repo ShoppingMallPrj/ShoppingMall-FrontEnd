@@ -29,7 +29,6 @@ import InquiryDetail from "../pages/inquiry/InquiryDetail";
 import InquiryCreate from "../pages/inquiry/InquiryCreate";
 import AdminItemList from "../pages/admin/AdminItemList";
 import AdminItemUpload from "../pages/admin/AdminItemUpload";
-import AdminOrderList from "../pages/admin/AdminOrderList";
 import Cart from "../pages/cart/Cart";
 // import Components
 
@@ -57,8 +56,6 @@ function Router() {
         <Route path="/item/:name" element={<Item />} />
         <Route path="/admin/item" element={<AdminItemList />} />
         <Route path="/admin/item/upload" element={<AdminItemUpload />} />
-        <Route path="/admin/order" element={<AdminOrderList />} />
-        {/* <Route path="/order" element={<Order />} /> */}
         <Route path="/inquiry" element={<Inquiry />} />
         <Route path="/inquiry/:inquiryId" element={<InquiryDetail />} />
         <Route path="/inquiry/create" element={<InquiryCreate />} />
