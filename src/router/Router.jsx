@@ -23,13 +23,14 @@ import NewArrivalsWomens from "../pages/womens/NewArrivalsWomens";
 import OuterWomens from "../pages/womens/OuterWomens";
 import ShoesWomens from "../pages/womens/ShoesWomens";
 import TopWomens from "../pages/womens/TopWomens";
-import Order from "../pages/Order";
+// import Order from "../pages/Order";
 import Inquiry from "../pages/inquiry/Inquiry";
 import InquiryDetail from "../pages/inquiry/InquiryDetail";
 import InquiryCreate from "../pages/inquiry/InquiryCreate";
 import AdminItemList from "../pages/admin/AdminItemList";
 import AdminItemUpload from "../pages/admin/AdminItemUpload";
 import AdminOrderList from "../pages/admin/AdminOrderList";
+import Cart from "../pages/cart/Cart";
 // import Components
 
 function Router() {
@@ -39,6 +40,7 @@ function Router() {
         <Route path="/" element={<Home />} />
         <Route path="/join" element={<Join />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/search/:keyword" element={<Search />} />
         <Route path="/mens/new-arrivals" element={<NewArrivalsMens />} />
         <Route path="/mens/outer" element={<OuterMens />} />
@@ -56,7 +58,7 @@ function Router() {
         <Route path="/admin/item" element={<AdminItemList />} />
         <Route path="/admin/item/upload" element={<AdminItemUpload />} />
         <Route path="/admin/order" element={<AdminOrderList />} />
-        <Route path="/order" element={<Order />} />
+        {/* <Route path="/order" element={<Order />} /> */}
         <Route path="/inquiry" element={<Inquiry />} />
         <Route path="/inquiry/:inquiryId" element={<InquiryDetail />} />
         <Route path="/inquiry/create" element={<InquiryCreate />} />
