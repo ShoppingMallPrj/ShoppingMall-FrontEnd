@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { fetchItemList } from "../api";
+import { fetchCategoryItemList, fetchItemList } from "../api";
 import { ItemListState } from "../atoms";
 
 const SortForm = styled.form`
@@ -29,7 +29,7 @@ function AdminSortOption() {
   });
   const setItemList = useSetRecoilState(ItemListState);
   const { refetch, isLoading, data } = useQuery("SortedItemList", () =>
-    fetchItemList(category.categoryName, gender.genderName)
+    fetchCategoryItemList(category.categoryName, gender.genderName)
   );
   useEffect(() => {
     refetch();
