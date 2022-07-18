@@ -1,5 +1,5 @@
+// const BASE_URL = "http://13.125.219.49";
 const BASE_URL = "https://shoppingmall-app.herokuapp.com";
-const TEST_URL = "http://localhost:8080";
 
 export async function fetchNewArriavlsMens() {
   return await (
@@ -15,6 +15,18 @@ export async function fetchItemList(keyword = "", gender = "") {
   return await (
     await fetch(
       `${BASE_URL}/api/item/list/?keyword=${keyword}&gender=${gender}`
+    )
+  ).json();
+}
+export async function fetchGenderItemList(gender) {
+  return await (
+    await fetch(`${BASE_URL}/api/item/list/gender?gender=${gender}`)
+  ).json();
+}
+export async function fetchCategoryItemList(category, gender) {
+  return await (
+    await fetch(
+      `${BASE_URL}/api/item/list/cate?category=${category}&gender=${gender}`
     )
   ).json();
 }
@@ -77,12 +89,9 @@ export async function fetchItemDetail(itemId) {
 /* 문의사항 데이터 리스트 요청 */
 export async function fetchInquiry({ page, size }) {
   return await (
-    await fetch(
-      `${BASE_URL}/api/inquiry/list?page=${page}&size=${size}&sort=inquiryId,desc`,
-      {
-        method: "GET",
-      }
-    )
+    await fetch(`${BASE_URL}/api/inquiry/list?page=${page}&page=${size}`, {
+      method: "GET",
+    })
   ).json();
 }
 
