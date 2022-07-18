@@ -1,31 +1,24 @@
 import { useQuery } from "react-query";
 import styled from "styled-components";
+import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
 // import Components
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-// import Mens New Arrivlas images
-import mensNewArrivals from "../assets/mens/new-arrivals/mens_outer1.webp";
-// import mensNewArrivals2 from "../../assets/mens/new-arrivals/mens_bottom1.webp";
-// import mensNewArrivals3 from "../../assets/mens/new-arrivals/mens_outer2.webp";
-// import mensNewArrivals4 from "../../assets/mens/new-arrivals/mens_top1.webp";
-// import mensNewArrivals5 from "../../assets/mens/new-arrivals/acc.webp";
-// import mensNewArrivals6 from "../../assets/mens/new-arrivals/mens_outer3.webp";
-// import mensNewArrivals7 from "../../assets/mens/new-arrivals/mens_bottom2.webp";
-// import mensNewArrivals8 from "../../assets/mens/new-arrivals/mens_bottom3.webp";
-// import mensNewArrivals9 from "../../assets/mens/new-arrivals/shoes1.webp";
-// import mensNewArrivals10 from "../../assets/mens/new-arrivals/mens_outer4.webp";
-// import mensNewArrivals11 from "../../assets/mens/new-arrivals/mens_bottom4.webp";
-// import mensNewArrivals12 from "../../assets/mens/new-arrivals/mens_outer5.webp";
-import { useLocation } from "react-router-dom";
 import { fetchItemInfo } from "../api";
-import { useState } from "react";
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   min-width: 144rem;
   margin-top: 4.2rem;
   margin-bottom: 22rem;
+`;
+const ItemInfo = styled.div`
+  display: flex;
+  justify-content: center;
+  min-width: 144rem;
 `;
 const ItemContents = styled.div`
   display: flex;
@@ -59,20 +52,21 @@ const ItemBar = styled.div`
   width: 4rem;
   height: 1rem;
   border-bottom: 1px solid black;
-  margin-bottom: 6rem;
+  margin-bottom: 3rem;
 `;
 const ItemText = styled.span`
-  width: 33rem;
+  width: 28rem;
   height: 29rem;
   margin-bottom: 1.2rem;
   text-align: center;
   margin-bottom: 6rem;
+  font-size: 1.4rem;
+  line-height: 2rem;
 `;
 const ItemPrice = styled.span`
   width: 33rem;
-  margin-bottom: 1.2rem;
+  margin-bottom: 3rem;
   text-align: center;
-  margin-bottom: 6rem;
   font-size: 1.3rem;
   font-weight: 600;
 `;
@@ -116,7 +110,50 @@ const ItemReview = styled.div`
   border: 1px solid black;
 `;
 const ItemRelated = styled.div`
-  width: 58rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 144rem;
+`;
+const ItemRelatedHead = styled.div`
+  width: 124rem;
+  text-align: left;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-top: 10rem;
+  margin-bottom: 1rem;
+`;
+const ItemRelatedContents = styled.div`
+  display: flex;
+  width: 124rem;
+  justify-content: space-between;
+  padding-top: 5rem;
+  border-top: 1px solid black;
+`;
+const ItemRelatedContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const ItemRelatedImg = styled.img`
+  margin-bottom: 1rem;
+  width: 20rem;
+  height: 30rem;
+`;
+const ItemRelatedText = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+const ItemRelatedTitle = styled.span`
+  width: 20rem;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 600;
+`;
+const ItemRelatedPrice = styled.span`
+  font-size: 1.4rem;
 `;
 
 function Item() {
@@ -125,53 +162,77 @@ function Item() {
     state: { id },
   } = useLocation();
   const { isLoading, data } = useQuery(["ItemInfo", id], () =>
-    fetchItemInfo(133)
+    fetchItemInfo(id)
   );
-  // console.log(data.images);
 
-  const onSelect = (event) => {
-    console.log(event.target.value);
-    console.dir(event.target);
-    console.log("Hello");
-  };
+  const onSelect = (event) => {};
 
   return (
     <>
       <Header />
       <main>
         <Container>
-          <ItemImg src={mensNewArrivals} />
-          <ItemContents>
-            <ItemTexts>
-              <ItemTitle>{isLoading ? null : data.itemName}</ItemTitle>
-              <ItemBar></ItemBar>
-              <ItemPrice>{isLoading ? null : data.itemPrice} KRW</ItemPrice>
-              <ItemText>{isLoading ? null : data.itemDescription}</ItemText>
-            </ItemTexts>
-            <ItemSelect onChange={onSelect}>
-              <ItemOption value="">Select Option</ItemOption>
+          <ItemInfo>
+            <ItemImg src={data?.itemProfile} />
+            <ItemContents>
+              <ItemTexts>
+                <ItemTitle>{data?.itemName}</ItemTitle>
+                <ItemBar></ItemBar>
+                <ItemPrice>{data?.itemPrice} KRW</ItemPrice>
+                <ItemText>{data?.itemDescription}</ItemText>
+              </ItemTexts>
+              <ItemSelect onChange={onSelect}>
+                <ItemOption value="">Select Option</ItemOption>
+                {isLoading
+                  ? null
+                  : data.options.map((option) => {
+                      return (
+                        <ItemOption
+                          key={option.optionId}
+                          value={option.optionId}
+                          name={option.optionContent}
+                        >
+                          {option.optionContent}
+                        </ItemOption>
+                      );
+                    })}
+              </ItemSelect>
+              <ItemList>
+                <ItemListText>
+                  <ItemOptionText></ItemOptionText>
+                  <ItemOptionPrice></ItemOptionPrice>
+                </ItemListText>
+              </ItemList>
+              <ItemButton>Add to Cart</ItemButton>
+            </ItemContents>
+          </ItemInfo>
+          <ItemRelated>
+            <ItemRelatedHead>Related Items</ItemRelatedHead>
+            <ItemRelatedContents>
               {isLoading
                 ? null
-                : data.options.map((option) => {
+                : data.related.slice(0, 5).map((item) => {
+                    const itemName = item.itemName.split(" ");
+                    const newItemName = itemName.join("-");
                     return (
-                      <ItemOption
-                        key={option.optionId}
-                        value={option.optionId}
-                        name={option.optionContent}
-                      >
-                        {option.optionContent}
-                      </ItemOption>
+                      <ItemRelatedContent key={item.itemId}>
+                        <Link
+                          to={`/item/${newItemName}`}
+                          state={{ id: item.itemId }}
+                        >
+                          <ItemRelatedImg src={item.itemProfile} />
+                        </Link>
+                        <ItemRelatedText>
+                          <ItemRelatedTitle>{item.itemName}</ItemRelatedTitle>
+                          <ItemRelatedPrice>
+                            ₩ {item.itemPrice}
+                          </ItemRelatedPrice>
+                        </ItemRelatedText>
+                      </ItemRelatedContent>
                     );
                   })}
-            </ItemSelect>
-            <ItemList>
-              <ItemListText>
-                <ItemOptionText></ItemOptionText>
-                <ItemOptionPrice></ItemOptionPrice>
-              </ItemListText>
-            </ItemList>
-            <ItemButton>Add to Cart</ItemButton>
-          </ItemContents>
+            </ItemRelatedContents>
+          </ItemRelated>
         </Container>
       </main>
       <Footer />
