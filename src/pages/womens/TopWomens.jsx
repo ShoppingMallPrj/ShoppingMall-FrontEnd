@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { fetchNewArriavlsMens } from "../../api";
+import { fetchCategoryItemList, fetchNewArriavlsMens } from "../../api";
 import styled from "styled-components";
 // import Components
 import Footer from "../../components/Footer";
@@ -17,6 +17,7 @@ import mensNewArrivals9 from "../../assets/mens/new-arrivals/shoes1.webp";
 import mensNewArrivals10 from "../../assets/mens/new-arrivals/mens_outer4.webp";
 import mensNewArrivals11 from "../../assets/mens/new-arrivals/mens_bottom4.webp";
 import mensNewArrivals12 from "../../assets/mens/new-arrivals/mens_outer5.webp";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: grid;
@@ -55,97 +56,34 @@ const Text = styled.span`
 `;
 
 function TopWomens() {
-  const { isLoading, data } = useQuery("TopWomens", fetchNewArriavlsMens);
-  console.log(data);
+  const { isLoading, data } = useQuery("TopWomens", () =>
+    fetchCategoryItemList("top", "w")
+  );
   return (
     <>
       <Header />
       <main>
         <Container>
-          <Contents>
-            <Img src={mensNewArrivals}></Img>
-            <Texts>
-              <Text>TAVERN BLAZER GREY TROPICAL WOOL</Text>
-              <Text>₩ 759,000</Text>
-            </Texts>
-          </Contents>
-          <Contents>
-            <Img src={mensNewArrivals2}></Img>
-            <Texts>
-              <Text>HIGH TOP CHINO GREY TROPICAL WOOL</Text>
-              <Text>₩ 479,000</Text>
-            </Texts>
-          </Contents>
-          <Contents>
-            <Img src={mensNewArrivals3}></Img>
-            <Texts>
-              <Text>CLOAK PARKA OLIVE RUBBER FILM</Text>
-              <Text>₩ 998,000</Text>
-            </Texts>
-          </Contents>
-          <Contents>
-            <Img src={mensNewArrivals4}></Img>
-            <Texts>
-              <Text>POPOVER ROUNDNECK GREY BOUCLE</Text>
-              <Text>₩ 386,000</Text>
-            </Texts>
-          </Contents>
-          <Contents>
-            <Img src={mensNewArrivals5}></Img>
-            <Texts>
-              <Text>SLIM BACKPACK ARMY GREEN TECH RIPSTOP</Text>
-              <Text>₩ 267,000</Text>
-            </Texts>
-          </Contents>
-          <Contents>
-            <Img src={mensNewArrivals6}></Img>
-            <Texts>
-              <Text>CARDIGAN BABY BLUE MOHAIR</Text>
-              <Text>₩ 452,000</Text>
-            </Texts>
-          </Contents>
-          <Contents>
-            <Img src={mensNewArrivals7}></Img>
-            <Texts>
-              <Text>TREKKING CARGO ARMY GREEN HIGH TWIST SOLARO</Text>
-              <Text>₩ 455,000</Text>
-            </Texts>
-          </Contents>
-          <Contents>
-            <Img src={mensNewArrivals8}></Img>
-            <Texts>
-              <Text>SABOT CUT BLACK ORGANZA</Text>
-              <Text>₩ 556,000</Text>
-            </Texts>
-          </Contents>
-          <Contents>
-            <Img src={mensNewArrivals9}></Img>
-            <Texts>
-              <Text>SPLINTER SKY</Text>
-              <Text>₩ 467,000</Text>
-            </Texts>
-          </Contents>
-          <Contents>
-            <Img src={mensNewArrivals10}></Img>
-            <Texts>
-              <Text>SHRUNKEN FULLZIP POLO BLACK RAYON PLAIT</Text>
-              <Text>₩ 387,000</Text>
-            </Texts>
-          </Contents>
-          <Contents>
-            <Img src={mensNewArrivals11}></Img>
-            <Texts>
-              <Text>TREKKING CARGO SHORTS ARMY GREEN COTTON RIPSTOP</Text>
-              <Text>₩ 365,000</Text>
-            </Texts>
-          </Contents>
-          <Contents>
-            <Img src={mensNewArrivals12}></Img>
-            <Texts>
-              <Text>SHRUNKEN FULLZIP POLO BEIGE ROPE WEAVE</Text>
-              <Text>₩ 423,000</Text>
-            </Texts>
-          </Contents>
+          {isLoading
+            ? null
+            : data.content.map((item) => {
+                const itemName = item.itemName.split(" ");
+                const newItemName = itemName.join("-");
+                return (
+                  <Contents key={item.itemId}>
+                    <Link
+                      to={`/item/${newItemName}`}
+                      state={{ id: item.itemId }}
+                    >
+                      <Img src={item.itemProfile}></Img>
+                      <Texts>
+                        <Text>{item.itemName}</Text>
+                        <Text>₩ {item.itemPrice}</Text>
+                      </Texts>
+                    </Link>
+                  </Contents>
+                );
+              })}
         </Container>
       </main>
       <Footer />
