@@ -234,6 +234,7 @@ function AdminItemUpload() {
                 // write your building UI
                 <div className="upload__image-wrapper">
                   <JoinButton
+                    type="button"
                     style={isDragging ? { color: "red" } : undefined}
                     onClick={onImageUpload}
                     {...dragProps}
@@ -241,17 +242,23 @@ function AdminItemUpload() {
                     Click or Drop here
                   </JoinButton>
                   &nbsp;
-                  <JoinButton onClick={onImageRemoveAll}>
+                  <JoinButton type="button" onClick={onImageRemoveAll}>
                     Remove all images
                   </JoinButton>
                   {imageList.map((image, index) => (
                     <div key={index} className="image-item">
                       <img src={image["data_url"]} alt="" width="100" />
                       <div className="image-item__btn-wrapper">
-                        <JoinButton onClick={() => onImageUpdate(index)}>
+                        <JoinButton
+                          type="button"
+                          onClick={() => onImageUpdate(index)}
+                        >
                           Update
                         </JoinButton>
-                        <JoinButton onClick={() => onImageRemove(index)}>
+                        <JoinButton
+                          type="button"
+                          onClick={() => onImageRemove(index)}
+                        >
                           Remove
                         </JoinButton>
                       </div>
@@ -324,7 +331,9 @@ function OptionUploader({ onChange }) {
         onChange={onTextChange}
         value={inputs.optionStock}
       />
-      <JoinButton onClick={onAdd}>Add New Option</JoinButton>
+      <JoinButton type="button" onClick={onAdd}>
+        Add New Option
+      </JoinButton>
       {options.map((option, index) => {
         return (
           <JoinOption>
@@ -333,6 +342,7 @@ function OptionUploader({ onChange }) {
             </JoinOptionContent>
             <JoinOptionContent>Stock : {option.optionStock}</JoinOptionContent>
             <JoinButton
+              type="button"
               onClick={() => {
                 onDelete(index);
               }}

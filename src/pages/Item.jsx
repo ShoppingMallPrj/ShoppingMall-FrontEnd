@@ -157,7 +157,9 @@ const ItemRelatedPrice = styled.span`
 `;
 
 function Item() {
-  const [item, setItem] = useState([]);
+  const [item, setItem] = useState(
+    JSON.parse(localStorage.getItem("cart")) || []
+  );
   const [option, setOption] = useState("");
   const {
     state: { id },
@@ -170,8 +172,8 @@ function Item() {
     setOption(event.target.value);
     setItem((info) => {
       return [
+        ...info,
         {
-          ...info,
           ...data,
           optionSelected: event.target.value,
           quantity: 1,

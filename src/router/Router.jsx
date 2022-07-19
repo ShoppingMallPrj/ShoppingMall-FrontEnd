@@ -54,11 +54,25 @@ function Router() {
         <Route path="/womens/shoes" element={<ShoesWomens />} />
         <Route path="/womens/acc" element={<AccWomens />} />
         <Route path="/item/:name" element={<Item />} />
-        <Route path="/admin/item" element={<AdminItemList />} />
+        <Route
+          path="/admin/item"
+          element={
+            <PrivateRoute>
+              <AdminItemList />
+            </PrivateRoute>
+          }
+        />
         <Route path="/admin/item/upload" element={<AdminItemUpload />} />
         <Route path="/inquiry" element={<Inquiry />} />
         <Route path="/inquiry/:inquiryId" element={<InquiryDetail />} />
-        <Route path="/inquiry/create" element={<InquiryCreate />} />
+        <Route
+          path="/inquiry/create"
+          element={
+            <PrivateRoute>
+              <InquiryCreate />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Routers>
   );
