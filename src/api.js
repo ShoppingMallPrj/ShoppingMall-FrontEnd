@@ -1,5 +1,5 @@
-// const BASE_URL = "http://13.125.219.49";
-const BASE_URL = "https://shoppingmall-app.herokuapp.com";
+const BASE_URL = "http://13.125.219.49";
+// const BASE_URL = "https://shoppingmall-app.herokuapp.com";
 
 export async function fetchNewArriavlsMens() {
   return await (
