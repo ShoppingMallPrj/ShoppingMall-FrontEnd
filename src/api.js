@@ -89,7 +89,7 @@ export async function fetchItemDetail(itemId) {
 /* 문의사항 데이터 리스트 요청 */
 export async function fetchInquiry({ page, size }) {
   return await (
-    await fetch(`${BASE_URL}/api/inquiry/list?page=${page}&page=${size}`, {
+    await fetch(`${BASE_URL}/api/inquiry/list?page=${page}&size=${size}`, {
       method: "GET",
     })
   ).json();

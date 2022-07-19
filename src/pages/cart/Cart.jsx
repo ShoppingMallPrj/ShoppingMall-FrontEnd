@@ -32,6 +32,7 @@ function Cart() {
         isSelected: false,
         optionSelected: 47,
       };
+      console.log(cartItem);
       const arr = JSON.parse(window.localStorage.getItem("cart")) || [];
       arr.push(cartItem);
       window.localStorage.setItem("cart", JSON.stringify(arr));
