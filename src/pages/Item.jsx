@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import Components
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -158,6 +158,7 @@ const ItemRelatedPrice = styled.span`
 
 function Item() {
   const [item, setItem] = useState([]);
+  const [option, setOption] = useState("");
   const {
     state: { id },
   } = useLocation();
@@ -165,7 +166,29 @@ function Item() {
     fetchItemInfo(id)
   );
 
-  const onSelect = (event) => {};
+  const onSelect = (event) => {
+    setOption(event.target.value);
+    setItem((info) => {
+      return [
+        {
+          ...info,
+          ...data,
+          optionSelected: event.target.value,
+          quantity: 1,
+          isSelected: false,
+        },
+      ];
+    });
+  };
+
+  const onClick = (event) => {
+    if (!option) {
+      event.preventDefault();
+      console.log("prevented");
+    } else {
+      localStorage.setItem("cart", JSON.stringify(item));
+    }
+  };
 
   return (
     <>
@@ -189,8 +212,7 @@ function Item() {
                       return (
                         <ItemOption
                           key={option.optionId}
-                          value={option.optionId}
-                          name={option.optionContent}
+                          value={option.optionContent}
                         >
                           {option.optionContent}
                         </ItemOption>
@@ -203,7 +225,7 @@ function Item() {
                   <ItemOptionPrice></ItemOptionPrice>
                 </ItemListText>
               </ItemList>
-              <ItemButton>Add to Cart</ItemButton>
+              <ItemButton onClick={onClick}>Add to Cart</ItemButton>
             </ItemContents>
           </ItemInfo>
           <ItemRelated>
