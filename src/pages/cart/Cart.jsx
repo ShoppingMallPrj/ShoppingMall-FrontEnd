@@ -7,9 +7,11 @@ import { fetchItemDetail } from "../../api";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 
-const styledImage = styled.img`
-  width: 100px;
-  height: 100px;
+const Container = styled.table`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 124rem;
 `;
 
 function Cart() {
@@ -21,35 +23,15 @@ function Cart() {
   });
   const [isAllChecked, setIsAllChecked] = useState(false);
 
-  //데이터 하나 요청해서 로컬 스토리지에 넣는다.
-  const testFetch = async () => {
-    try {
-      const res = await fetchItemDetail(120);
-      const item = await res.json();
-      const cartItem = {
-        ...item,
-        quantity: 1,
-        isSelected: false,
-        optionSelected: 47,
-      };
-      console.log(cartItem);
-      const arr = JSON.parse(window.localStorage.getItem("cart")) || [];
-      arr.push(cartItem);
-      window.localStorage.setItem("cart", JSON.stringify(arr));
-      console.log(await res.json());
-    } catch (error) {}
-  };
-
   useEffect(() => {
-    //set some samples
-    //testFetch();
-    const items = JSON.parse(window.localStorage.getItem("cart")) || [];
+    const items = JSON.parse(localStorage.getItem("cart")) || [];
 
     setCartState({
       cartItems: items,
       isLoading: false,
       isError: false,
     });
+    console.log(items);
   }, []);
 
   //현재 state를 저장
@@ -100,41 +82,71 @@ function Cart() {
     saveState();
   };
 
-  useEffect(() => {
-    window.localStorage.setItem("cart", JSON.stringify(cartState.cartItems));
-  }, [cartState.cartItems]);
+  // useEffect(() => {
+  //   window.localStorage.setItem("cart", JSON.stringify(cartState.cartItems));
+  // }, [cartState.cartItems]);
+
+  const ContainerItemInfo = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  `;
+  const ItemInfoImg = styled.img`
+    height: 25rem;
+    width: 15rem;
+    margin-bottom: 2rem;
+  `;
+  const ItemInfoTitle = styled.div`
+    font-size: 1.4rem;
+    font-weight: 600;
+  `;
+  const ItemInfoText = styled.div`
+    display: flex;
+    flex-direction: column;
+  `;
 
   /*테이블의 아이템 정보 부분 */
   const ItemInfo = ({ item, index }) => {
     return (
-      <>
-        <img
-          style={{ height: "100px", width: "100px" }}
-          src={item.itemProfile}
-          alt="image"
-        />
-        <div>{item.itemName}</div>
-        <div>
-          option :
-          {
-            item.options.filter(
-              (option) => option.optionId === item.optionSelected
-            )[0].optionContent
-          }
-        </div>
-        <select
-          defaultValue={item.optionSelected}
-          onChange={(e) => selectOption(e, index)}
-        >
-          {item.options.map((option) => {
-            return (
-              <option value={option.optionId}>{option.optionContent}</option>
-            );
-          })}
-        </select>
-      </>
+      <ContainerItemInfo>
+        <ItemInfoImg src={item.itemProfile} alt="new" />
+        <ItemInfoText>
+          <ItemInfoTitle>{item.itemName}</ItemInfoTitle>
+          <select
+            defaultValue={item.optionSelected}
+            onChange={(e) => selectOption(e, index)}
+          >
+            {item.options.map((option) => {
+              return (
+                <option value={option.optionId}>{option.optionContent}</option>
+              );
+            })}
+          </select>
+        </ItemInfoText>
+      </ContainerItemInfo>
     );
   };
+  const TotalInfo = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 20rem;
+    margin-top: 10rem;
+    margin-bottom: 22rem;
+  `;
+  const TotalTitle = styled.div`
+    font-size: 1.6rem;
+    font-weight: 600;
+  `;
+  const TotalButton = styled.button`
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    padding-bottom: 0.5rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    cursor: pointer;
+  `;
 
   /* 상품 총 합계 계산하는 함수 */
   const Total = () => {
@@ -144,64 +156,153 @@ function Cart() {
         total += item.itemPrice * item.quantity;
       }
     });
-    return <>total : {total}</>;
+    return <TotalTitle>Total : {total}</TotalTitle>;
   };
+
+  const CartIndex = styled.thead`
+    width: 100rem;
+    height: 5rem;
+    padding: 5rem;
+    border: 1px solid black;
+  `;
+  const CartIndexRow = styled.div`
+    display: flex;
+    width: 100rem;
+  `;
+  const CartIndexHead = styled.div`
+    font-size: 1.4rem;
+    text-align: center;
+    &:first-child {
+      width: 5%;
+    }
+    &:nth-child(2) {
+      width: 35%;
+    }
+    &:nth-child(3) {
+      width: 15%;
+    }
+    &:nth-child(4) {
+      width: 15%;
+    }
+    &:nth-child(5) {
+      width: 12%;
+    }
+    &:last-child {
+      width: 11%;
+    }
+  `;
+  const CartIndexCheckbox = styled.input``;
+  const CartItems = styled.tbody`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100rem;
+    padding: 5rem;
+    border: 1px solid black;
+    border-top: 0;
+  `;
+  const CartItemRow = styled.tr`
+    display: flex;
+    width: 100rem;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5rem;
+  `;
+  const CartItemInfo = styled.div`
+    display: flex;
+  `;
+  const CartItemDesription = styled.td`
+    /* line-height: 5rem; */
+    text-align: center;
+  `;
+  const CartItemCheckbox = styled.input``;
+  const CartItemPrice = styled.td`
+    font-size: 1.4rem;
+    font-weight: 500;
+  `;
+  const CartIemButton = styled.button`
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    padding-bottom: 0.5rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+  `;
+  const CartMainText = styled.div`
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin-bottom: 6.5rem;
+  `;
 
   const Body = () => {
     if (cartState.isLoading) return <>LOADING...</>;
     if (cartState.isError) return <>ERROR</>;
 
     return (
-      <table>
-        <thead>
-          <tr>
-            <th>
-              <input
+      <Container>
+        <CartMainText>Cart</CartMainText>
+        <CartIndex>
+          <CartIndexRow>
+            <CartIndexHead>
+              <CartIndexCheckbox
                 type="checkbox"
                 checked={isAllChecked}
                 onChange={selectAll}
               />
-            </th>
-            <th>정보</th>
-            <th>가격</th>
-            <th>수량</th>
-            <th>합계</th>
-            <th>상태</th>
-          </tr>
-        </thead>
-        <tbody>
+            </CartIndexHead>
+            <CartIndexHead>정보</CartIndexHead>
+            <CartIndexHead>가격</CartIndexHead>
+            <CartIndexHead>수량</CartIndexHead>
+            <CartIndexHead>합계</CartIndexHead>
+            <CartIndexHead>상태</CartIndexHead>
+          </CartIndexRow>
+        </CartIndex>
+        <CartItems>
           {cartState.cartItems.map((item, index) => {
             return (
               <>
-                <tr>
-                  <td>
-                    <input
+                <CartItemRow>
+                  <CartItemDesription key={item.itemId}>
+                    <CartItemCheckbox
                       type="checkbox"
                       checked={item.isSelected}
                       onChange={(e) => {
                         selectItem(e, index);
                       }}
                     />
-                  </td>
-                  <td>
+                  </CartItemDesription>
+                  <CartItemDesription>
                     <ItemInfo item={item} index={index} />
-                  </td>
-                  <td>{item.itemPrice} WON</td>
-                  <td>
-                    <button onClick={() => updateQuantity(index, 1)}>+</button>
+                  </CartItemDesription>
+                  <CartItemPrice>{item.itemPrice} WON</CartItemPrice>
+                  <CartItemDesription>
+                    <CartIemButton onClick={() => updateQuantity(index, 1)}>
+                      +
+                    </CartIemButton>
                     {item.quantity}
-                    <button onClick={() => updateQuantity(index, -1)}>-</button>
-                  </td>
-                  <td>{item.quantity * item.itemPrice}</td>
-                  <td>
-                    <button onClick={() => deleteItem(index)}>삭제</button>
-                  </td>
-                </tr>
+                    <CartIemButton onClick={() => updateQuantity(index, -1)}>
+                      -
+                    </CartIemButton>
+                  </CartItemDesription>
+                  <CartItemPrice>
+                    {item.quantity * item.itemPrice}
+                  </CartItemPrice>
+                  <CartItemDesription>
+                    <CartIemButton onClick={() => deleteItem(index)}>
+                      삭제
+                    </CartIemButton>
+                  </CartItemDesription>
+                </CartItemRow>
               </>
             );
           })}
-        </tbody>
-      </table>
+        </CartItems>
+        <TotalInfo>
+          <Total />
+          <TotalButton onClick={toOrder}>주문하기</TotalButton>
+        </TotalInfo>
+      </Container>
     );
   };
 
@@ -220,9 +321,8 @@ function Cart() {
   return (
     <>
       <Header />
+      <cartIndex></cartIndex>
       <Body />
-      <Total />
-      <button onClick={toOrder}>주문하기</button>
       <Footer />
     </>
   );
